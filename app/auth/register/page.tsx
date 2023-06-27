@@ -10,40 +10,43 @@ import { useState } from "react";
 
 export default function Register() {
   const [message, setMessage] = useState(null);
-  const [errorMessage, setErrorMessage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   // handle register
-  const handlelogin = async (e: any) => {
+  const handleRegister = async (e: any) => {
     e.preventDefault();
 
+    const username = e.target.username.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
+    const confirmPassword = e.target.confirmPassword.value;
+
+    if (password !== confirmPassword) {
+      setErrorMessage("Password and Confirm Password not match");
+      return;
+    }
 
     const data = {
+      username: username,
       email: email,
       password: password,
     };
     setMessage(null);
-    setErrorMessage(null);
+    setErrorMessage("");
     setLoading(true);
     try {
-      const login = await UserService.login(data);
-      const resLoginData = login.data;
-      if (resLoginData.error) {
-        setErrorMessage(resLoginData.message);
+      const login = await UserService.register(data);
+      const resRegisterData = login.data;
+      if (resRegisterData.error) {
+        setErrorMessage(resRegisterData.message);
         setLoading(false);
-      } else if (resLoginData.authorization) {
-        // set cookie
-        CookieHelper.set({
-          key: "token",
-          value: resLoginData.authorization.token,
-        });
-        setMessage(resLoginData.message);
+      } else {
+        setMessage(resRegisterData.message);
         setLoading(false);
 
-        router.push(`/`);
+        // router.push(`/auth/login`);
       }
     } catch (error: any) {
       // return custom error message from API if any
@@ -56,7 +59,6 @@ export default function Register() {
       }
     }
   };
-
   return (
     <div>
       <main className="flex justify-center">
@@ -71,7 +73,7 @@ export default function Register() {
           {message && <Alert type={"success"}>{message}</Alert>}
           {errorMessage && <Alert type={"danger"}>{errorMessage}</Alert>}
 
-          <form onSubmit={handlelogin} method="post">
+          <form onSubmit={handleRegister} method="post">
             <div className="m-4">
               <input
                 className="input"
@@ -99,7 +101,7 @@ export default function Register() {
             <div className="m-4">
               <input
                 className="input"
-                type="confirmPassword"
+                type="password"
                 name="confirmPassword"
                 placeholder="Confirm Password"
               />

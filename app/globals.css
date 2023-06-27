@@ -68,4 +68,59 @@
 .container {
   padding: 0 1rem;
 }
+
+.link {
+  @apply text-blue-500 hover:text-red-600;
+}
+
+.table {
+  @apply w-full text-left border-collapse;
+}
+
+.table th {
+  @apply py-2 px-4 bg-gray-100 text-gray-600 font-bold uppercase text-sm;
+}
+
+.table td {
+  @apply py-2 px-4 border-b border-gray-100 text-sm;
+}
+
+.table tr {
+  @apply hover:bg-gray-100;
+}
+
+.table tr:nth-child(even) {
+  @apply bg-gray-50;
+}
+
+.table tr:last-child {
+  @apply border-b-0;
+}
+
+.table caption {
+  @apply text-gray-500 text-xs italic;
+}
+
+.table thead tr {
+  @apply border-b border-gray-200;
+}
+
+.table thead tr th {
+  @apply font-semibold text-gray-600;
+}
+
+.table tbody tr td {
+  @apply text-gray-600;
+}
+
+.table tbody tr:nth-child(even) {
+  @apply bg-gray-50;
+}
+
+.table tbody tr:last-child {
+  @apply border-b-0;
+}
+
+
+
 /*container = flex min-h-screen flex-col items-center justify-between p-24 */

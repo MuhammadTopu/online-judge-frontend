@@ -17,19 +17,16 @@ export const UserService = {
   },
 
   register: async ({
-    fname,
-    lname,
+    username,
     email,
     password,
   }: {
-    fname: string;
-    lname: string;
+    username: string;
     email: string;
     password: string;
   }) => {
     const data = {
-      fname: fname,
-      lname: lname,
+      username: username,
       email: email,
       password: password,
     };
@@ -37,8 +34,9 @@ export const UserService = {
   },
 
   // get user details
-  getUserDetails: async (context = null) => {
-    const userToken = CookieHelper.get({ key: "token", context });
+  getUserDetails: async ({ token = "", context = null }) => {
+    // const userToken = CookieHelper.get({ key: "token", context });
+    const userToken = token;
 
     const _config = {
       headers: {

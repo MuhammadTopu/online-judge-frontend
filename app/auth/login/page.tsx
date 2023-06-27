@@ -90,7 +90,7 @@ export default function Login() {
             </div>
 
             <button type="submit" className="m-4 btn primary">
-              Register
+              Login
             </button>
           </form>
         </div>
