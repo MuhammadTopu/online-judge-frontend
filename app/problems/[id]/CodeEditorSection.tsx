@@ -10,7 +10,7 @@ export default function CodeEditorSection({
   problem_id: number;
 }) {
   const [code, setCode] = useState("");
-  const [language, setLanguage] = useState("");
+  const [language, setLanguage] = useState("cpp");
   const [result, setResult] = useState<any>();
 
   const [message, setMessage] = useState(null);
@@ -64,14 +64,18 @@ export default function CodeEditorSection({
       <div className="m-2">
         <select onChange={(e) => setLanguage(e.target.value)}>
           <option value="">Select Language</option>
-          <option value="c">C</option>
-          <option value="cpp">C++</option>
+          <option value="cpp" selected>
+            C++
+          </option>
           <option value="java">Java</option>
           <option value="py">Python</option>
         </select>
       </div>
       <div style={{ border: "solid 1px" }} className="codeeditor m-2">
-        <CodeEditor handleEditorChange={handleEditorChange} />
+        <CodeEditor
+          language={language}
+          handleEditorChange={handleEditorChange}
+        />
       </div>
 
       <div className="m-2">

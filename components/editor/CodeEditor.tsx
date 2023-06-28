@@ -1,13 +1,13 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Editor from "@monaco-editor/react";
 
 export default function CodeEditor({
   handleEditorChange,
-  children,
+  language = "cpp",
 }: {
   handleEditorChange?: (value: any, event: any) => void;
-  children?: React.ReactNode;
+  language?: string;
 }) {
   return (
     <Editor
@@ -15,8 +15,14 @@ export default function CodeEditor({
       height="50vh"
       width="50vw"
       // defaultLanguage="javascript"
-      defaultLanguage="cpp"
-      defaultValue="// some comment"
+      defaultLanguage={language}
+      // defaultValue="// some comment"
+      defaultValue={`#include<stdio.h>
+
+int main(){
+    printf("Hello world");
+    return 0;
+}`}
       onChange={handleEditorChange}
     />
   );
