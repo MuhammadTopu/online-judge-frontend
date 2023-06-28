@@ -121,6 +121,8 @@
   @apply border-b-0;
 }
 
-
+.title {
+  @apply text-2xl font-bold text-gray-700;
+}
 
 /*container = flex min-h-screen flex-col items-center justify-between p-24 */

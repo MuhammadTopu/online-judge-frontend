@@ -23,8 +23,6 @@ async function getProblemData() {
 export default async function Home() {
   const problemData = await getProblemData();
 
-  console.log(problemData);
-
   return (
     <main className="container">
       <h1>Problem</h1>
