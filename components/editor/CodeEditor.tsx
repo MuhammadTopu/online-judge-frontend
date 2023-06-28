@@ -13,7 +13,7 @@ export default function CodeEditor({
     <Editor
       // height="90vh"
       height="50vh"
-      width="50vw"
+      width="40vw"
       // defaultLanguage="javascript"
       defaultLanguage={language}
       // defaultValue="// some comment"

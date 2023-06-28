@@ -94,7 +94,7 @@ export default function CodeEditorSection({
       </div>
 
       <div className="m-2">
-        <h2>Result:</h2>
+        <h2 className="text-xl">Result:</h2>
         <div>
           {loading && <div>Please wait...</div>}
           {message && <Alert type={"success"}>{message}</Alert>}
@@ -104,11 +104,12 @@ export default function CodeEditorSection({
           {result &&
             result.result.map((item: any, index: any) => (
               <div key={index}>
-                <div>Test Case: {index + 1}</div>
+                <div className="font-bold">Test Case: {index + 1}</div>
                 <div>Actual output: {item.actualOutput}</div>
                 <div>Verdict: {item.verdict}</div>
                 <div>Time: {item.time}</div>
                 <div>Memory: {item.memory}</div>
+                <hr />
               </div>
             ))}
         </div>
