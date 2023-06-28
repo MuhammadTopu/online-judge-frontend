@@ -50,8 +50,12 @@ export const ProblemService = {
       constraint,
       time,
       memory,
-      sample_test_cases,
-      system_test_cases,
+      // sample_test_cases,
+      // system_test_cases,
+      sample_test_cases_input,
+      sample_test_cases_output,
+      system_test_cases_input,
+      system_test_cases_output,
     }: {
       name: string;
       statement: string;
@@ -59,8 +63,12 @@ export const ProblemService = {
       constraint: string;
       time: number;
       memory: number;
-      sample_test_cases: string;
-      system_test_cases: string;
+      // sample_test_cases: string;
+      // system_test_cases: string;
+      sample_test_cases_input?: string;
+      sample_test_cases_output?: string;
+      system_test_cases_input?: string;
+      system_test_cases_output?: string;
     },
     context = null
   ) => {
@@ -80,8 +88,12 @@ export const ProblemService = {
       constraint: constraint,
       time: time,
       memory: memory,
-      sample_test_cases: sample_test_cases,
-      system_test_cases: system_test_cases,
+      // sample_test_cases: sample_test_cases,
+      // system_test_cases: system_test_cases,
+      sample_test_cases_input: sample_test_cases_input,
+      sample_test_cases_output: sample_test_cases_output,
+      system_test_cases_input: system_test_cases_input,
+      system_test_cases_output: system_test_cases_output,
     };
 
     return await Fetch.post(`/problem`, data, _config);

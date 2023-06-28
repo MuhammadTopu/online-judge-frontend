@@ -27,8 +27,13 @@ export default function CreateProblemClient() {
     const time = e.target.time.value;
     const memory = e.target.memory.value;
 
-    const sample_test_cases = e.target.sample_test_cases.value;
-    const system_test_cases = e.target.system_test_cases.value;
+    // const sample_test_cases = e.target.sample_test_cases.value;
+    // const system_test_cases = e.target.system_test_cases.value;
+
+    const sample_test_cases_input = e.target.sample_test_cases_input.value;
+    const sample_test_cases_output = e.target.sample_test_cases_output.value;
+    const system_test_cases_input = e.target.system_test_cases_input.value;
+    const system_test_cases_output = e.target.system_test_cases_output.value;
 
     const data = {
       name: name,
@@ -38,8 +43,12 @@ export default function CreateProblemClient() {
       time: time,
       memory: memory,
 
-      sample_test_cases: sample_test_cases,
-      system_test_cases: system_test_cases,
+      // sample_test_cases: sample_test_cases,
+      // system_test_cases: system_test_cases,
+      sample_test_cases_input: sample_test_cases_input,
+      sample_test_cases_output: sample_test_cases_output,
+      system_test_cases_input: system_test_cases_input,
+      system_test_cases_output: system_test_cases_output,
     };
     setMessage("");
     setErrorMessage(null);
@@ -97,8 +106,6 @@ export default function CreateProblemClient() {
                 className="input"
                 name="explanation"
                 id=""
-                cols={30}
-                rows={10}
                 placeholder="Problem explanation"
               ></textarea>
             </div>
@@ -107,29 +114,39 @@ export default function CreateProblemClient() {
                 className="input"
                 name="constraint"
                 id=""
-                cols={30}
-                rows={10}
                 placeholder="Problem constraint"
               ></textarea>
             </div>
             <div className="m-4">
               <textarea
                 className="input"
-                name="sample_test_cases"
+                name="sample_test_cases_input"
                 id=""
-                cols={30}
-                rows={10}
-                placeholder="Sample test cases"
+                placeholder="Sample test cases input"
               ></textarea>
             </div>
             <div className="m-4">
               <textarea
                 className="input"
-                name="system_test_cases"
+                name="sample_test_cases_output"
                 id=""
-                cols={30}
-                rows={10}
-                placeholder="System test cases"
+                placeholder="Sample test cases output"
+              ></textarea>
+            </div>
+            <div className="m-4">
+              <textarea
+                className="input"
+                name="system_test_cases_input"
+                id=""
+                placeholder="System test cases input"
+              ></textarea>
+            </div>
+            <div className="m-4">
+              <textarea
+                className="input"
+                name="system_test_cases_output"
+                id=""
+                placeholder="System test cases output"
               ></textarea>
             </div>
             <div className="m-4">

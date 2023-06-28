@@ -42,6 +42,32 @@ export default async function Index({ params }: { params: { id: number } }) {
             className="statement"
             dangerouslySetInnerHTML={{ __html: problemData.statement }}
           ></div>
+          <br />
+          <div>
+            <h1 className="font-bold">Examples</h1>
+            <div className="flex justify-around">
+              <div className="flex-col">
+                <div className="font-bold">Input</div>
+                {problemData.sample_test_cases.map((item: any) => {
+                  return (
+                    <>
+                      <div>{item.input}</div>
+                    </>
+                  );
+                })}
+              </div>
+              <div className="flex-col">
+                <div className="font-bold">Output</div>
+                {problemData.sample_test_cases.map((item: any) => {
+                  return (
+                    <>
+                      <div>{item.output}</div>
+                    </>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
         </div>
         <div>
           <CodeEditorSection problem_id={problemData.id} />
