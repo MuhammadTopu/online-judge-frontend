@@ -38,7 +38,10 @@ export default async function Index({ params }: { params: { id: number } }) {
             memory limit per test: {problemData.memory} megabytes
           </div>
           <br />
-          <div className="statement">{problemData.statement}</div>
+          <div
+            className="statement"
+            dangerouslySetInnerHTML={{ __html: problemData.statement }}
+          ></div>
         </div>
         <div>
           <CodeEditorSection problem_id={problemData.id} />

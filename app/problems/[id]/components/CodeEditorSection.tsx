@@ -64,7 +64,8 @@ export default function CodeEditorSection({
       <div className="m-2">
         <select
           style={{ border: "solid 1px" }}
-          value={"cpp"}
+          value={language}
+          defaultValue={language}
           onChange={(e) => setLanguage(e.target.value)}
         >
           <option value="">Select Language</option>
