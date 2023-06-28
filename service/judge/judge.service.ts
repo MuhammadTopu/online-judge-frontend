@@ -13,10 +13,12 @@ export const JudgeService = {
       code,
       language,
       problem_id,
+      op,
     }: {
       code: string;
       language: string;
       problem_id: number;
+      op: string;
     },
     context = null
   ) => {
@@ -34,7 +36,10 @@ export const JudgeService = {
       language: language,
       problem_id: problem_id,
     };
-
-    return await Fetch.post(`/judge/submit`, data, _config);
+    if (op == "run") {
+      return await Fetch.post(`/judge/run`, data, _config);
+    } else {
+      return await Fetch.post(`/judge/submit`, data, _config);
+    }
   },
 };

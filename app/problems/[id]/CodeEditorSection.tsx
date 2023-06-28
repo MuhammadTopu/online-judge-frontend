@@ -17,17 +17,19 @@ export default function CodeEditorSection({
   const [errorMessage, setErrorMessage] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const submit = async (e: any) => {
+  const submit = async (op: string = "run", e: any) => {
     e.preventDefault();
 
     const data = {
       code: code,
       language: language,
       problem_id: problem_id,
+      op: op,
     };
     setMessage(null);
     setErrorMessage(null);
     setLoading(true);
+    setResult(null);
     try {
       const judgeService = await JudgeService.create(data);
       const resJudgeService = judgeService.data;
@@ -59,19 +61,13 @@ export default function CodeEditorSection({
 
   return (
     <>
-      <div>
-        {loading && <div>Please wait...</div>}
-        {message && <Alert type={"success"}>{message}</Alert>}
-        {errorMessage && <Alert type={"danger"}>{errorMessage}</Alert>}
-      </div>
-
       <div className="m-2">
         <select onChange={(e) => setLanguage(e.target.value)}>
           <option value="">Select Language</option>
           <option value="c">C</option>
           <option value="cpp">C++</option>
           <option value="java">Java</option>
-          <option value="python">Python</option>
+          <option value="py">Python</option>
         </select>
       </div>
       <div style={{ border: "solid 1px" }} className="codeeditor m-2">
@@ -79,18 +75,30 @@ export default function CodeEditorSection({
       </div>
 
       <div className="m-2">
-        <button onClick={submit} className="btn primary">
+        <button onClick={(e) => submit("run", e)} className="btn warning">
+          Run
+        </button>
+        <button
+          onClick={(e) => submit("submit", e)}
+          className="btn danger mx-2"
+        >
           Submit
         </button>
       </div>
 
       <div className="m-2">
-        <h3>Result</h3>
+        <h2>Result:</h2>
+        <div>
+          {loading && <div>Please wait...</div>}
+          {message && <Alert type={"success"}>{message}</Alert>}
+          {errorMessage && <Alert type={"danger"}>{errorMessage}</Alert>}
+        </div>
         <div>
           {result &&
             result.result.map((item: any, index: any) => (
               <div key={index}>
                 <div>Test Case: {index + 1}</div>
+                <div>Actual output: {item.actualOutput}</div>
                 <div>Verdict: {item.verdict}</div>
                 <div>Time: {item.time}</div>
                 <div>Memory: {item.memory}</div>
