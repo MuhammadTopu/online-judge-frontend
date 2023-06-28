@@ -2,7 +2,7 @@ import { Alert } from "@/components/alert/Alert";
 import CodeEditor from "@/components/editor/CodeEditor";
 import { ProblemService } from "@/service/problem/problem.service";
 import { cookies } from "next/headers";
-import CodeEditorSection from "./CodeEditorSection";
+import CodeEditorSection from "./components/CodeEditorSection";
 
 async function getProblemData(id: number) {
   const cookieStore = cookies();

@@ -62,11 +62,13 @@ export default function CodeEditorSection({
   return (
     <>
       <div className="m-2">
-        <select onChange={(e) => setLanguage(e.target.value)}>
+        <select
+          style={{ border: "solid 1px" }}
+          value={"cpp"}
+          onChange={(e) => setLanguage(e.target.value)}
+        >
           <option value="">Select Language</option>
-          <option value="cpp" selected>
-            C++
-          </option>
+          <option value="cpp">C++</option>
           <option value="java">Java</option>
           <option value="py">Python</option>
         </select>
