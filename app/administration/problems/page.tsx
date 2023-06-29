@@ -24,26 +24,37 @@ export default async function Home() {
   const problemData = await getProblemData();
 
   return (
-    <main className="container">
-      <h1>Problem</h1>
-      <Link className="link" href="/problems/new">
-        Create new problem
-      </Link>
-
+    <main className="container flex flex-col justify-center items-center">
       <div>
+        <h1 className="font-bold m-2">Problems</h1>
+      </div>
+
+      <div className="w-1/2">
         <table className="table">
           <thead>
             <tr>
               <th>Problem</th>
-              <th>Actions</th>
+              <th>Difficulty</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
             {problemData?.map((problem: any) => (
               <tr key={problem.id}>
-                <td>{problem.name}</td>
                 <td>
-                  <Link href={`/problems/${problem.id}`}>View</Link>
+                  <Link className="link" href={`/problems/${problem.id}`}>
+                    {problem.name}
+                  </Link>
+                </td>
+                <td>{problem.difficulty}</td>
+                <td>
+                  <Link
+                    href={`/administration/problems/edit/${problem.id}`}
+                    className="btn primary"
+                  >
+                    Edit
+                  </Link>
+                  <button className="btn danger">Delete</button>
                 </td>
               </tr>
             ))}

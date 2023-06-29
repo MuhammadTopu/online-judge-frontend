@@ -38,36 +38,80 @@ export default async function Index({ params }: { params: { id: number } }) {
             memory limit per test: {problemData.memory} megabytes
           </div>
           <br />
-          <div
-            className="statement"
-            dangerouslySetInnerHTML={{ __html: problemData.statement }}
-          ></div>
-          <br />
-          <div>
-            <h1 className="font-bold">Examples</h1>
-            <div className="flex justify-around">
+          {problemData.statement && (
+            <>
+              <div
+                className="statement"
+                dangerouslySetInnerHTML={{ __html: problemData.statement }}
+              ></div>
+              <br />
+            </>
+          )}
+
+          <div className="flex justify-around">
+            {problemData.input_format && (
               <div className="flex-col">
                 <div className="font-bold">Input</div>
-                {problemData.sample_test_cases.map((item: any) => {
-                  return (
-                    <>
-                      <div>{item.input}</div>
-                    </>
-                  );
-                })}
+                <div
+                  dangerouslySetInnerHTML={{ __html: problemData.input_format }}
+                ></div>
               </div>
+            )}
+            {problemData.output_format && (
               <div className="flex-col">
                 <div className="font-bold">Output</div>
-                {problemData.sample_test_cases.map((item: any) => {
-                  return (
-                    <>
-                      <div>{item.output}</div>
-                    </>
-                  );
-                })}
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: problemData.output_format,
+                  }}
+                ></div>
               </div>
-            </div>
+            )}
           </div>
+          <br />
+          {problemData.sample_test_cases && (
+            <>
+              <div>
+                <h1 className="font-bold">Examples</h1>
+                <div
+                  style={{ border: "solid 1px" }}
+                  className="flex justify-around"
+                >
+                  <div className="flex-col">
+                    <div className="font-bold">Input</div>
+                    {problemData.sample_test_cases.map((item: any) => {
+                      return (
+                        <>
+                          <div>{item.input}</div>
+                        </>
+                      );
+                    })}
+                  </div>
+                  <div className="flex-col">
+                    <div className="font-bold">Output</div>
+                    {problemData.sample_test_cases.map((item: any) => {
+                      return (
+                        <>
+                          <div>{item.output}</div>
+                        </>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+              <br />
+            </>
+          )}
+
+          {problemData.note && (
+            <div>
+              <h1 className="font-bold">Note</h1>
+              <div
+                className="note"
+                dangerouslySetInnerHTML={{ __html: problemData.note }}
+              ></div>
+            </div>
+          )}
         </div>
         <div>
           <CodeEditorSection problem_id={problemData.id} />
