@@ -51,8 +51,8 @@ export default function CreateProblemClient() {
     e.preventDefault();
 
     const name = e.target.name.value;
-    const time = e.target.time.value;
-    const memory = e.target.memory.value;
+    const time_limit = e.target.time_limit.value;
+    const memory_limit = e.target.memory_limit.value;
     const difficulty = e.target.difficulty.value;
 
     const sample_test_cases_input = e.target.sample_test_cases_input.value;
@@ -63,8 +63,8 @@ export default function CreateProblemClient() {
     const data = {
       name: name,
       statement: statement,
-      time: time,
-      memory: memory,
+      time_limit: time_limit,
+      memory_limit: memory_limit,
       input_format: input_format,
       output_format: output_format,
       note: note,
@@ -102,16 +102,8 @@ export default function CreateProblemClient() {
 
   return (
     <div>
-      <main className="flex justify-center">
-        <div
-          style={
-            {
-              // padding: "50px",
-              // width: "50%",
-            }
-          }
-          className="self-center"
-        >
+      <main className="flex justify-center container">
+        <div className="self-center">
           {loading && <div>Please wait...</div>}
           {message && <Alert type={"success"}>{message}</Alert>}
           {errorMessage && <Alert type={"danger"}>{errorMessage}</Alert>}
@@ -149,6 +141,33 @@ export default function CreateProblemClient() {
                 </select>
               </div>
             </div>
+
+            <div className="m-4 flex">
+              <label className="w-full" htmlFor="time_limit">
+                Time limit (seconds)
+              </label>
+              <input
+                className="input"
+                type="text"
+                name="time_limit"
+                id="time_limit"
+                defaultValue={1}
+                placeholder="Time limit"
+              />
+            </div>
+            <div className="m-4 flex">
+              <label className="w-full" htmlFor="memory_limit">
+                Memory limit (megabytes)
+              </label>
+              <input
+                className="input"
+                type="text"
+                name="memory_limit"
+                defaultValue={64}
+                placeholder="Memory limit"
+              />
+            </div>
+
             <div className="m-4 flex">
               <label className="w-full" htmlFor="statement">
                 Statement
@@ -245,31 +264,6 @@ export default function CreateProblemClient() {
                 id="system_test_cases_output"
                 placeholder="System test cases output"
               ></textarea>
-            </div>
-            <div className="m-4 flex">
-              <label className="w-full" htmlFor="time_limit">
-                Time limit (seconds)
-              </label>
-              <input
-                className="input"
-                type="text"
-                name="time_limit"
-                id="time_limit"
-                defaultValue={1}
-                placeholder="Time limit"
-              />
-            </div>
-            <div className="m-4 flex">
-              <label className="w-full" htmlFor="memory_limit">
-                Memory limit (megabytes)
-              </label>
-              <input
-                className="input"
-                type="text"
-                name="memory_limit"
-                defaultValue={64}
-                placeholder="Memory limit"
-              />
             </div>
 
             <button type="submit" className="m-4 btn primary">

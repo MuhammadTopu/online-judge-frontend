@@ -6,14 +6,14 @@ export default function Home() {
       <h1>Administration page</h1>
       <div className="flex">
         <div>
-          <Link className="link" href="/administration/contests/create">
-            Create new contest
+          <Link className="link" href="/administration/contests">
+            Manage contest
           </Link>
         </div>
 
         <div className="mx-2">
-          <Link className="link" href="/administration/problems/create">
-            Create new problem
+          <Link className="link" href="/administration/problems">
+            Manage problem
           </Link>
         </div>
       </div>

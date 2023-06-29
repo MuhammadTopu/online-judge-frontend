@@ -46,8 +46,8 @@ export const ProblemService = {
     {
       name,
       statement,
-      time,
-      memory,
+      time_limit,
+      memory_limit,
       input_format,
       output_format,
       note,
@@ -60,8 +60,8 @@ export const ProblemService = {
     }: {
       name?: string;
       statement?: string;
-      time?: number;
-      memory?: number;
+      time_limit?: number;
+      memory_limit?: number;
       input_format?: string;
       output_format?: string;
       note?: string;
@@ -86,8 +86,8 @@ export const ProblemService = {
     const data = {
       name: name,
       statement: statement,
-      time: time,
-      memory: memory,
+      time_limit: time_limit,
+      memory_limit: memory_limit,
       input_format: input_format,
       output_format: output_format,
       note: note,
