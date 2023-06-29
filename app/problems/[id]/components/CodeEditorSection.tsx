@@ -106,6 +106,7 @@ export default function CodeEditorSection({
               <div key={index}>
                 <div className="font-bold">Test Case: {index + 1}</div>
                 <div>Actual output: {item.actualOutput}</div>
+                <div>Expected output: {item.actualOutput}</div>
                 <div>Verdict: {item.verdict}</div>
                 <div>Time: {item.time}</div>
                 <div>Memory: {item.memory}</div>

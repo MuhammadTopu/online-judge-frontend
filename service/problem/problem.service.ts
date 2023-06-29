@@ -46,25 +46,27 @@ export const ProblemService = {
     {
       name,
       statement,
-      explanation,
-      constraint,
       time,
       memory,
-      // sample_test_cases,
-      // system_test_cases,
+      input_format,
+      output_format,
+      note,
+      difficulty,
+
       sample_test_cases_input,
       sample_test_cases_output,
       system_test_cases_input,
       system_test_cases_output,
     }: {
-      name: string;
-      statement: string;
-      explanation: string;
-      constraint: string;
-      time: number;
-      memory: number;
-      // sample_test_cases: string;
-      // system_test_cases: string;
+      name?: string;
+      statement?: string;
+      time?: number;
+      memory?: number;
+      input_format?: string;
+      output_format?: string;
+      note?: string;
+      difficulty?: string;
+
       sample_test_cases_input?: string;
       sample_test_cases_output?: string;
       system_test_cases_input?: string;
@@ -84,12 +86,13 @@ export const ProblemService = {
     const data = {
       name: name,
       statement: statement,
-      explanation: explanation,
-      constraint: constraint,
       time: time,
       memory: memory,
-      // sample_test_cases: sample_test_cases,
-      // system_test_cases: system_test_cases,
+      input_format: input_format,
+      output_format: output_format,
+      note: note,
+      difficulty: difficulty,
+
       sample_test_cases_input: sample_test_cases_input,
       sample_test_cases_output: sample_test_cases_output,
       system_test_cases_input: system_test_cases_input,

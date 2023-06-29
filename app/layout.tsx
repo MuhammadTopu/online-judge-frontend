@@ -76,6 +76,9 @@ export default async function RootLayout({
               <Link className="nav-item" href="/profile">
                 {userData?.username}
               </Link>
+              <Link className="nav-item" href="/administration/contests">
+                Administration
+              </Link>
               <Link className="nav-item" href="/auth/logout">
                 Logout
               </Link>

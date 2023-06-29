@@ -7,9 +7,11 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import "react-quill/dist/quill.snow.css"; // ES6
 
 export default function TextEditor({
+  id,
   value,
   onChange,
 }: {
+  id?: string;
   value: any;
   onChange: (value: any) => void;
 }) {
@@ -68,6 +70,7 @@ export default function TextEditor({
     <>
       <ReactQuill
         // ref={reactQuill}
+        id={id}
         modules={modules}
         formats={formats}
         theme="snow"
