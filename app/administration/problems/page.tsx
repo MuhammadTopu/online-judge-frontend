@@ -54,7 +54,7 @@ export default async function Home() {
                   >
                     Edit
                   </Link>
-                  <button className="btn danger">Delete</button>
+                  <button className="ml-2 btn danger">Delete</button>
                 </td>
               </tr>
             ))}
