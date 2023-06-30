@@ -33,6 +33,9 @@ export const UserService = {
     return await Fetch.post("/auth/register", data, config);
   },
 
+  logout: (context = null) => {
+    CookieHelper.destroy({ key: "token", context });
+  },
   // get user details
   getUserDetails: async ({ token = "", context = null }) => {
     // const userToken = CookieHelper.get({ key: "token", context });
@@ -72,6 +75,28 @@ export const UserService = {
     };
 
     return await Fetch.get(`/user/${id}`, _config);
+  },
+
+  findOneByUsername: async ({
+    username,
+    token = "",
+    context = null,
+  }: {
+    username: string;
+    token?: string;
+    context?: any;
+  }) => {
+    // const userToken = CookieHelper.get({ key: "token", context });
+    const userToken = token || CookieHelper.get({ key: "token", context });
+
+    const _config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + userToken,
+      },
+    };
+
+    return await Fetch.get(`/user/profile/${username}`, _config);
   },
 
   update: async (
