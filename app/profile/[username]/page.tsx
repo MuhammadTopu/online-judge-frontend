@@ -1,3 +1,4 @@
+import { DateHelper } from "@/helper/date.helper";
 import { UserService } from "@/service/user/user.service";
 import { cookies } from "next/headers";
 import Link from "next/link";
@@ -42,14 +43,17 @@ export default async function Home({
             <br />
             <span>
               {userData?.fname} {userData?.lname}
-              {userData?.city && "," + userData?.city}
-              {userData?.country}
+              {userData?.profile?.city && ", " + userData?.profile?.city}
+              {userData?.profile?.country && ", " + userData?.profile?.country}
             </span>
 
-            {userData?.university && (
+            {userData?.profile?.organization && (
               <>
                 <br />
-                <span>From {userData?.university}</span>
+                From{" "}
+                <span className="font-bold">
+                  {userData?.profile?.organization}
+                </span>
               </>
             )}
           </div>
@@ -65,7 +69,13 @@ export default async function Home({
             )}
             <div>
               Registered:{" "}
-              <span className="font-bold">{userData?.created_at}</span>
+              <span className="font-bold">
+                {DateHelper.diff({
+                  date1: userData?.created_at,
+                  unit: "years",
+                }).toLocaleString()}{" "}
+                years ago
+              </span>
             </div>
           </div>
         </div>
