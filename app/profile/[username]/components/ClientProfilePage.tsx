@@ -31,7 +31,6 @@ export default function ClientProfilePage({ userData }: { userData: any }) {
     if (file) {
       data.append("avatar", file, file.name);
     }
-    console.log(file);
 
     setMessage("");
     setErrorMessage("");
@@ -140,7 +139,12 @@ export default function ClientProfilePage({ userData }: { userData: any }) {
           <div>
             <span className="font-bold">Upload profile picture</span>
             <br />
-            <input type="file" onChange={handleFileChange} name="avatar" />
+            <input
+              type="file"
+              accept="image/*"
+              name="avatar"
+              onChange={handleFileChange}
+            />
             <br />
             <div>
               <button
