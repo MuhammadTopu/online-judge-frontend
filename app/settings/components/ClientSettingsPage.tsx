@@ -1,5 +1,6 @@
 "use client";
 import { Alert } from "@/components/alert/Alert";
+import { DateHelper } from "@/helper/date.helper";
 import { UserService } from "@/service/user/user.service";
 import React, { useState } from "react";
 
@@ -114,7 +115,10 @@ export default function ClientSettingsPage({ userData }: { userData: any }) {
               type="date"
               name="date_of_birth"
               placeholder="Date of birth"
-              defaultValue={userData.profile.date_of_birth}
+              defaultValue={DateHelper.format(
+                userData.profile.date_of_birth,
+                "YYYY-MM-DD"
+              )}
             />
           </div>
           <div className="m-4 flex">
