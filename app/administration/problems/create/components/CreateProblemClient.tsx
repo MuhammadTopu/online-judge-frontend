@@ -109,6 +109,9 @@ export default function CreateProblemClient() {
           {errorMessage && <Alert type={"danger"}>{errorMessage}</Alert>}
 
           <form onSubmit={handlelogin} method="post">
+            <button type="submit" className="m-4 btn primary">
+              Submit
+            </button>
             <div className="m-4 flex">
               <label className="w-full" htmlFor="name">
                 Problem name
@@ -265,10 +268,6 @@ export default function CreateProblemClient() {
                 placeholder="System test cases output"
               ></textarea>
             </div>
-
-            <button type="submit" className="m-4 btn primary">
-              Submit
-            </button>
           </form>
         </div>
       </main>

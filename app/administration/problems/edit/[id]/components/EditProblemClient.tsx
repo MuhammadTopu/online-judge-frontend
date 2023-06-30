@@ -5,7 +5,7 @@ import TextEditor from "@/components/editor/TextEditor";
 import { ProblemService } from "@/service/problem/problem.service";
 import { useState } from "react";
 
-export default function CreateProblemClient({
+export default function EditProblemClient({
   id,
   problemData,
 }: {
@@ -131,6 +131,10 @@ export default function CreateProblemClient({
           {errorMessage && <Alert type={"danger"}>{errorMessage}</Alert>}
 
           <form onSubmit={handlelogin} method="post">
+            <button type="submit" className="m-4 btn primary">
+              Submit
+            </button>
+
             <div className="m-4 flex">
               <label className="w-full" htmlFor="name">
                 Problem name
@@ -293,10 +297,6 @@ export default function CreateProblemClient({
                 defaultValue={system_test_cases_output}
               ></textarea>
             </div>
-
-            <button type="submit" className="m-4 btn primary">
-              Submit
-            </button>
           </form>
         </div>
       </main>

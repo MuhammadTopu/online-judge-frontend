@@ -7,6 +7,7 @@ async function getProblemData() {
   const token = cookieStore.get("token");
   try {
     const problemService = await ProblemService.findAll({
+      me: 1,
       token: token!["value"],
     });
 

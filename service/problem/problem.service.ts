@@ -8,7 +8,7 @@ const config = {
 };
 
 export const ProblemService = {
-  findAll: async ({ token = "", context = null }) => {
+  findAll: async ({ me = 0, token = "", context = null }) => {
     // const userToken = CookieHelper.get({ key: "token", context });
     const userToken = token;
 
@@ -19,7 +19,7 @@ export const ProblemService = {
       },
     };
 
-    return await Fetch.get(`/problem`, _config);
+    return await Fetch.get(`/problem?me=${me}`, _config);
   },
   findOne: async ({
     id,
@@ -159,6 +159,6 @@ export const ProblemService = {
       system_test_cases_output: system_test_cases_output,
     };
 
-    return await Fetch.put(`/problem/${id}`, data, _config);
+    return await Fetch.patch(`/problem/${id}`, data, _config);
   },
 };

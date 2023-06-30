@@ -32,10 +32,10 @@ export default async function Index({ params }: { params: { id: number } }) {
         <div className="flex-col">
           <div className="title text-center">{problemData.name}</div>
           <div className="text-center">
-            time limit per test: {problemData.time} seconds
+            time limit per test: {problemData.time_limit} seconds
           </div>
           <div className="text-center">
-            memory limit per test: {problemData.memory} megabytes
+            memory limit per test: {problemData.memory_limit} megabytes
           </div>
           <br />
           {problemData.statement && (
