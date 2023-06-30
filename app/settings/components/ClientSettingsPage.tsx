@@ -4,45 +4,9 @@ import { UserService } from "@/service/user/user.service";
 import React, { useState } from "react";
 
 export default function ClientSettingsPage({ userData }: { userData: any }) {
-  const [statement, setStatement] = useState("");
-  const [input_format, setInputFormat] = useState("");
-  const [output_format, setOutputFormat] = useState("");
-  const [note, setNote] = useState("");
-
   const [message, setMessage] = useState("");
-  const [errorMessage, setErrorMessage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
-
-  const handleStatementChange = (value: string) => {
-    setStatement(value);
-  };
-  const handleInputFormatChange = (value: string) => {
-    setInputFormat(value);
-  };
-  const handleOutputFormatChange = (value: string) => {
-    setOutputFormat(value);
-  };
-  const handleNoteChange = (value: string) => {
-    setNote(value);
-  };
-
-  const difficultes = [
-    {
-      id: 1,
-      name: "easy",
-      value: "Easy",
-    },
-    {
-      id: 2,
-      name: "medium",
-      value: "Medium",
-    },
-    {
-      id: 3,
-      name: "hard",
-      value: "Hard",
-    },
-  ];
 
   // handle submit
   const handleSubmit = async (e: any) => {
@@ -79,7 +43,7 @@ export default function ClientSettingsPage({ userData }: { userData: any }) {
       recipient_phone_number: recipient_phone_number,
     };
     setMessage("");
-    setErrorMessage(null);
+    setErrorMessage("");
     setLoading(true);
     try {
       const problemService = await UserService.update(data);
@@ -124,6 +88,7 @@ export default function ClientSettingsPage({ userData }: { userData: any }) {
               type="text"
               name="fname"
               placeholder="First name"
+              defaultValue={userData.fname}
             />
           </div>
           <div className="m-4 flex">
@@ -136,6 +101,7 @@ export default function ClientSettingsPage({ userData }: { userData: any }) {
               type="text"
               name="lname"
               placeholder="Last name"
+              defaultValue={userData.lname}
             />
           </div>
           <div className="m-4 flex">
@@ -145,9 +111,10 @@ export default function ClientSettingsPage({ userData }: { userData: any }) {
             <input
               id="date_of_birth"
               className="input"
-              type="datetime-local"
+              type="date"
               name="date_of_birth"
               placeholder="Date of birth"
+              defaultValue={userData.profile.date_of_birth}
             />
           </div>
           <div className="m-4 flex">
@@ -160,6 +127,7 @@ export default function ClientSettingsPage({ userData }: { userData: any }) {
               type="text"
               name="city"
               placeholder="City"
+              defaultValue={userData.profile.city}
             />
           </div>
           <div className="m-4 flex">
@@ -172,6 +140,7 @@ export default function ClientSettingsPage({ userData }: { userData: any }) {
               type="text"
               name="country"
               placeholder="Country"
+              defaultValue={userData.profile.country}
             />
           </div>
           <div className="m-4 flex">
@@ -184,6 +153,7 @@ export default function ClientSettingsPage({ userData }: { userData: any }) {
               type="text"
               name="organization"
               placeholder="Organization"
+              defaultValue={userData.profile.organization}
             />
           </div>
           <div className="m-4 flex">
@@ -196,6 +166,7 @@ export default function ClientSettingsPage({ userData }: { userData: any }) {
               type="text"
               name="recipient_name"
               placeholder="Recipient name"
+              defaultValue={userData.profile.recipient_name}
             />
           </div>
           <div className="m-4 flex">
@@ -208,6 +179,7 @@ export default function ClientSettingsPage({ userData }: { userData: any }) {
               type="text"
               name="recipient_zip_code"
               placeholder="Recipient zip code"
+              defaultValue={userData.profile.recipient_zip_code}
             />
           </div>
           <div className="m-4 flex">
@@ -220,6 +192,7 @@ export default function ClientSettingsPage({ userData }: { userData: any }) {
               type="text"
               name="recipient_country"
               placeholder="Recipient country"
+              defaultValue={userData.profile.recipient_country}
             />
           </div>
           <div className="m-4 flex">
@@ -232,6 +205,7 @@ export default function ClientSettingsPage({ userData }: { userData: any }) {
               type="text"
               name="recipient_state"
               placeholder="Recipient state"
+              defaultValue={userData.profile.recipient_state}
             />
           </div>
           <div className="m-4 flex">
@@ -244,6 +218,33 @@ export default function ClientSettingsPage({ userData }: { userData: any }) {
               type="text"
               name="recipient_city"
               placeholder="Recipient city"
+              defaultValue={userData.profile.recipient_city}
+            />
+          </div>
+          <div className="m-4 flex">
+            <label className="w-full" htmlFor="recipient_address">
+              Recipient address
+            </label>
+            <input
+              id="recipient_address"
+              className="input"
+              type="text"
+              name="recipient_address"
+              placeholder="Recipient address"
+              defaultValue={userData.profile.recipient_address}
+            />
+          </div>
+          <div className="m-4 flex">
+            <label className="w-full" htmlFor="recipient_phone_number">
+              Recipient phone number
+            </label>
+            <input
+              id="recipient_phone_number"
+              className="input"
+              type="tel"
+              name="recipient_phone_number"
+              placeholder="Recipient phone number"
+              defaultValue={userData.profile.recipient_phone_number}
             />
           </div>
         </form>

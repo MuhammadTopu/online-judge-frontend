@@ -28,7 +28,6 @@ export default async function Home({
   params: { username: string };
 }) {
   const userData = await getUserData(params.username);
-  console.log(userData);
 
   return (
     <main className="container">
