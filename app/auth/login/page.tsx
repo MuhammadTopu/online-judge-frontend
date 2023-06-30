@@ -43,7 +43,8 @@ export default function Login() {
         setMessage(resLoginData.message);
         setLoading(false);
 
-        router.push(`/`);
+        // router.push(`/`);
+        window.location.href = "/";
       }
     } catch (error: any) {
       // return custom error message from API if any

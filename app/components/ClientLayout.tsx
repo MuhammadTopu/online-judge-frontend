@@ -59,38 +59,34 @@ export default function ClientLayout({
                   >
                     Profile
                   </Link>
-                  <button className="dropdown-item w-full" onClick={handleLogout}>
+                  <Link className="dropdown-item" href={`/settings`}>
+                    Settings
+                  </Link>
+                  <Link className="dropdown-item" href={`/administration`}>
+                    Administration
+                  </Link>
+                  <button
+                    className="dropdown-item w-full"
+                    onClick={handleLogout}
+                  >
                     Logout
                   </button>
-                </div>
-              </div>
-
-              <div className="dropdown">
-                <button className="dropbtn nav-item">Administration</button>
-                <div className="dropdown-content">
-                  <Link
-                    className="dropdown-item"
-                    href={`/administration/contests`}
-                  >
-                    Contests
-                  </Link>
-                  <Link
-                    className="dropdown-item"
-                    href={`/administration/problems`}
-                  >
-                    Problems
-                  </Link>
                 </div>
               </div>
             </>
           ) : (
             <>
-              <Link className="nav-item" href="/auth/login">
-                Login
-              </Link>
-              <Link className="nav-item" href="/auth/register">
-                Register
-              </Link>
+              <div className="dropdown">
+                <button className="dropbtn nav-item">Account</button>
+                <div className="dropdown-content">
+                  <Link className="dropdown-item" href="/auth/login">
+                    Login
+                  </Link>
+                  <Link className="dropdown-item" href="/auth/register">
+                    Register
+                  </Link>
+                </div>
+              </div>
             </>
           )}
         </nav>
