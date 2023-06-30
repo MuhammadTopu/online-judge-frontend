@@ -1,9 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import { Alert } from "@/components/alert/Alert";
 import TextEditor from "@/components/editor/TextEditor";
 import { ProblemService } from "@/service/problem/problem.service";
-import { useState } from "react";
+import CustomToastContainer from "@/components/CustomToast/CustomToastContainer";
+import { CustomToast } from "@/util/Toast/CustomToast";
 
 export default function EditProblemClient({
   id,
@@ -105,9 +107,11 @@ export default function EditProblemClient({
       const problemService = await ProblemService.update(id, data);
       const resProblemData = problemService.data;
       if (resProblemData.error) {
+        CustomToast.show(resProblemData.message);
         setErrorMessage(resProblemData.message);
         setLoading(false);
       } else {
+        CustomToast.show(resProblemData.message);
         setMessage(resProblemData.message);
         setLoading(false);
       }
@@ -132,6 +136,7 @@ export default function EditProblemClient({
           {errorMessage && <Alert type={"danger"}>{errorMessage}</Alert>}
 
           <form onSubmit={handlelogin} method="post">
+            <CustomToastContainer />
             <button type="submit" className="m-4 btn primary">
               Submit
             </button>
