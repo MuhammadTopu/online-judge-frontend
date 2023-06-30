@@ -46,8 +46,8 @@ export default function CreateProblemClient() {
     },
   ];
 
-  // handle login
-  const handlelogin = async (e: any) => {
+  // handle
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
 
     const name = e.target.name.value;
@@ -108,7 +108,7 @@ export default function CreateProblemClient() {
           {message && <Alert type={"success"}>{message}</Alert>}
           {errorMessage && <Alert type={"danger"}>{errorMessage}</Alert>}
 
-          <form onSubmit={handlelogin} method="post">
+          <form onSubmit={handleSubmit} method="post">
             <button type="submit" className="m-4 btn primary">
               Submit
             </button>

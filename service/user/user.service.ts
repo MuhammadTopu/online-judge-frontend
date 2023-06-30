@@ -100,19 +100,34 @@ export const UserService = {
   },
 
   update: async (
-    id: number,
     {
       fname,
       lname,
-      username,
-      email,
-      role_id,
+      date_of_birth,
+      city,
+      country,
+      organization,
+      recipient_name,
+      recipient_zip_code,
+      recipient_country,
+      recipient_state,
+      recipient_city,
+      recipient_address,
+      recipient_phone_number,
     }: {
       fname: string;
       lname: string;
-      username: string;
-      email: string;
-      role_id: number;
+      date_of_birth: string;
+      city: string;
+      country: string;
+      organization: string;
+      recipient_name: string;
+      recipient_zip_code: string;
+      recipient_country: string;
+      recipient_state: string;
+      recipient_city: string;
+      recipient_address: string;
+      recipient_phone_number: string;
     },
     context = null
   ) => {
@@ -126,14 +141,22 @@ export const UserService = {
     };
 
     const data = {
-      fname,
-      lname,
-      username,
-      email,
-      role_id,
+      fname: fname,
+      lname: lname,
+      date_of_birth: date_of_birth,
+      city: city,
+      country: country,
+      organization: organization,
+      recipient_name: recipient_name,
+      recipient_zip_code: recipient_zip_code,
+      recipient_country: recipient_country,
+      recipient_state: recipient_state,
+      recipient_city: recipient_city,
+      recipient_address: recipient_address,
+      recipient_phone_number: recipient_phone_number,
     };
 
-    return await Fetch.patch(`/user/${id}`, data, _config);
+    return await Fetch.patch(`/user`, data, _config);
   },
 
   //

@@ -28,6 +28,7 @@ export default async function Home({
   params: { username: string };
 }) {
   const userData = await getUserData(params.username);
+  console.log(userData);
 
   return (
     <main className="container">
@@ -42,11 +43,11 @@ export default async function Home({
             <br />
             <span>
               {userData?.fname} {userData?.lname}
-              {userData.city && "," + userData?.city}
+              {userData?.city && "," + userData?.city}
               {userData?.country}
             </span>
 
-            {userData.university && (
+            {userData?.university && (
               <>
                 <br />
                 <span>From {userData?.university}</span>
@@ -57,7 +58,7 @@ export default async function Home({
             Contest rating: <span className="font-bold">{userData?.score}</span>
             <br />
             <span>{userData?.email}</span>
-            {userData.availability && (
+            {userData?.availability && (
               <>
                 <br />
                 <span>Online status: {userData?.availability}</span>
