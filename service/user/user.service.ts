@@ -166,6 +166,7 @@ export const UserService = {
       headers: {
         "Content-Type": "application/json",
         Authorization: "Bearer " + userToken,
+        "content-type": "multipart/form-data",
       },
     };
 
