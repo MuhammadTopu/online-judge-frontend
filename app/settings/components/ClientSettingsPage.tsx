@@ -165,6 +165,10 @@ export default function ClientSettingsPage({ userData }: { userData: any }) {
               defaultValue={userData.profile.organization}
             />
           </div>
+          <p>
+            *This address will be used to send you t-shirts, certificates, etc.
+            Please, keep it actual and valid.
+          </p>
           <div className="m-4 flex">
             <label className="w-full" htmlFor="recipient_name">
               Recipient name
