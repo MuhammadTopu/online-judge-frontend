@@ -48,18 +48,40 @@ export default function ClientLayout({
 
           {userData ? (
             <>
-              <Link
-                className="nav-item"
-                href={`/profile/${userData?.username}`}
-              >
-                {userData?.username}
-              </Link>
-              <Link className="nav-item" href="/administration">
-                Administration
-              </Link>
-              <button className="nav-item" onClick={handleLogout}>
-                Logout
-              </button>
+              <div className="dropdown">
+                <button className="dropbtn nav-item">
+                  {userData?.username}
+                </button>
+                <div className="dropdown-content">
+                  <Link
+                    className="dropdown-item"
+                    href={`/profile/${userData?.username}`}
+                  >
+                    Profile
+                  </Link>
+                  <button className="dropdown-item w-full" onClick={handleLogout}>
+                    Logout
+                  </button>
+                </div>
+              </div>
+
+              <div className="dropdown">
+                <button className="dropbtn nav-item">Administration</button>
+                <div className="dropdown-content">
+                  <Link
+                    className="dropdown-item"
+                    href={`/administration/contests`}
+                  >
+                    Contests
+                  </Link>
+                  <Link
+                    className="dropdown-item"
+                    href={`/administration/problems`}
+                  >
+                    Problems
+                  </Link>
+                </div>
+              </div>
             </>
           ) : (
             <>
