@@ -25,16 +25,17 @@ export default function EditProblemClient({
   const system_test_cases = problemData.system_test_cases;
 
   const sample_test_cases_input = sample_test_cases.map((test_case: any) => {
-    return test_case.input;
+    return test_case.input + "\n";
   });
   const sample_test_cases_output = sample_test_cases.map((test_case: any) => {
-    return test_case.output;
+    return test_case.output + "\n";
   });
+
   const system_test_cases_input = system_test_cases.map((test_case: any) => {
-    return test_case.input;
+    return test_case.input + "\n";
   });
   const system_test_cases_output = system_test_cases.map((test_case: any) => {
-    return test_case.output;
+    return test_case.output + "\n";
   });
 
   const handleStatementChange = (value: string) => {
