@@ -28,23 +28,26 @@ export default function ClientProfilePage({ userData }: { userData: any }) {
     e.preventDefault();
 
     const data = new FormData();
-    if (file) {
-      data.append("avatar", file, file.name);
+    if (!file) {
+      CustomToast.show("Please select an image.");
+      setErrorMessage("Please select an image.");
+      return;
     }
+    data.append("avatar", file, file.name);
 
     setMessage("");
     setErrorMessage("");
     setLoading(true);
     try {
-      const problemService = await UserService.updateAvatar(data);
-      const resProblemData = problemService.data;
-      if (resProblemData.error) {
-        CustomToast.show(resProblemData.message);
-        setErrorMessage(resProblemData.message);
+      const userService = await UserService.updateAvatar(data);
+      const resData = userService.data;
+      if (resData.error) {
+        CustomToast.show(resData.message);
+        setErrorMessage(resData.message);
         setLoading(false);
       } else {
-        CustomToast.show(resProblemData.message);
-        setMessage(resProblemData.message);
+        CustomToast.show(resData.message);
+        setMessage(resData.message);
         setLoading(false);
       }
     } catch (error: any) {
