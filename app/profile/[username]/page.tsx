@@ -9,7 +9,7 @@ async function getUserData(username: string) {
   try {
     const userService = await UserService.findOneByUsername({
       username: username,
-      token: token!["value"],
+      token: token && token!["value"],
     });
 
     const responseUser = userService.data.data;
