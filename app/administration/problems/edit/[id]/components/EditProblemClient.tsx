@@ -323,10 +323,10 @@ export default function EditProblemClient({
 
               <div className="w-full">
                 <CustomSelect
-                  defaultValue={tagData.map((tag: any) => {
+                  defaultValue={problemData.ProblemTag.map((tag: any) => {
                     return {
-                      value: tag.name,
-                      label: tag.name,
+                      value: tag.tag.name,
+                      label: tag.tag.name,
                     };
                   })}
                   onChange={handleTagChange}
