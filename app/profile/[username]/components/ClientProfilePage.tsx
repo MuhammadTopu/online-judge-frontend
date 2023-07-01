@@ -1,9 +1,9 @@
 "use client";
-import { Alert } from "@/components/alert/Alert";
 import { DateHelper } from "@/helper/date.helper";
 import Link from "next/link";
 import React from "react";
 import CustomImage from "@/components/reusable/CustomImage";
+import { LineChart } from "@/components/Chart/LineChart";
 
 export default function ClientProfilePage({ userData }: { userData: any }) {
   return (
@@ -53,6 +53,21 @@ export default function ClientProfilePage({ userData }: { userData: any }) {
                 years ago
               </span>
             </div>
+          </div>
+          <div style={{ width: "600px" }}>
+            <LineChart
+              labels={[
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+              ]}
+              data={[10, 12, 14, 16, 18, 20, 22]}
+              label="Submissions"
+            />
           </div>
         </div>
         <div>
