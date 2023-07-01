@@ -31,6 +31,7 @@ export default function CustomImage({
       : window.btoa(str)
   return (
     <Image
+      crossOrigin="anonymous"
       src={src} alt={alt}
       loading="lazy"
       width={width}

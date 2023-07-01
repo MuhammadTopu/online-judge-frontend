@@ -14,7 +14,7 @@ export default function ClientProfilePage({ userData }: { userData: any }) {
   const [loading, setLoading] = useState(false);
 
   const [file, setFile] = useState<any>();
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState(userData.avatar);
 
   const handleFileChange = (e: any) => {
     if (e.target.files) {
