@@ -31,7 +31,7 @@ export default async function Home() {
       </div>
 
       <div>
-        <Link href="/administration/problems/create" className="link">
+        <Link href="/author/problems/create" className="link">
           Create new problem
         </Link>
       </div>
@@ -68,7 +68,7 @@ export default async function Home() {
                 <td>{problem.difficulty}</td>
                 <td>
                   <Link
-                    href={`/administration/problems/edit/${problem.id}`}
+                    href={`/author/problems/edit/${problem.id}`}
                     className="btn primary"
                   >
                     Edit

@@ -61,8 +61,8 @@ export default function ClientLayout({
                   <Link className="dropdown-item" href={`/settings`}>
                     Settings
                   </Link>
-                  <Link className="dropdown-item" href={`/administration`}>
-                    Administration
+                  <Link className="dropdown-item" href={`/author`}>
+                    Author Dashboard
                   </Link>
                   <button
                     className="dropdown-item w-full"
