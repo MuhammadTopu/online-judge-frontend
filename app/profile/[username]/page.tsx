@@ -1,6 +1,8 @@
 import { UserService } from "@/service/user/user.service";
 import { cookies } from "next/headers";
 import ClientProfilePage from "./components/ClientProfilePage";
+import { AppConfig } from "@/config/app.config";
+import { Metadata } from "next";
 
 async function getUserData(username: string) {
   const cookieStore = cookies();
@@ -20,6 +22,19 @@ async function getUserData(username: string) {
     }
     return null;
   }
+}
+
+// Dynamic metadata
+export async function generateMetadata({
+  params,
+}: {
+  params: { username: string };
+}): Promise<Metadata> {
+  const userData = await getUserData(params.username);
+  return {
+    title: `${userData.username} - ${AppConfig().app.name}`,
+    description: AppConfig().app.meta.description,
+  };
 }
 
 export default async function Home({

@@ -1,8 +1,8 @@
-import { Alert } from "@/components/alert/Alert";
-import CodeEditor from "@/components/editor/CodeEditor";
 import { ProblemService } from "@/service/problem/problem.service";
 import { cookies } from "next/headers";
 import CodeEditorSection from "./components/CodeEditorSection";
+import { AppConfig } from "@/config/app.config";
+import { Metadata } from "next";
 
 async function getProblemData(id: number) {
   const cookieStore = cookies();
@@ -22,6 +22,19 @@ async function getProblemData(id: number) {
     }
     return null;
   }
+}
+
+// Dynamic metadata
+export async function generateMetadata({
+  params,
+}: {
+  params: { id: number };
+}): Promise<Metadata> {
+  const problemData = await getProblemData(params.id);
+  return {
+    title: `${problemData.name} - ${AppConfig().app.name}`,
+    description: AppConfig().app.meta.description,
+  };
 }
 export default async function Index({ params }: { params: { id: number } }) {
   const problemData = await getProblemData(params.id);

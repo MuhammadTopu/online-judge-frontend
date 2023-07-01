@@ -20,6 +20,7 @@ async function getProblemData() {
     return null;
   }
 }
+
 export default async function Home() {
   const problemData = await getProblemData();
 
