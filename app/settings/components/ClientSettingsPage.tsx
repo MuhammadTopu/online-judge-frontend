@@ -125,7 +125,7 @@ export default function ClientSettingsPage({ userData }: { userData: any }) {
               name="date_of_birth"
               placeholder="Date of birth"
               defaultValue={DateHelper.format(
-                userData.profile.date_of_birth,
+                userData?.profile?.date_of_birth,
                 "YYYY-MM-DD"
               )}
             />
@@ -140,7 +140,7 @@ export default function ClientSettingsPage({ userData }: { userData: any }) {
               type="text"
               name="city"
               placeholder="City"
-              defaultValue={userData.profile.city}
+              defaultValue={userData?.profile?.city}
             />
           </div>
           <div className="m-4 flex">
@@ -153,7 +153,7 @@ export default function ClientSettingsPage({ userData }: { userData: any }) {
               type="text"
               name="country"
               placeholder="Country"
-              defaultValue={userData.profile.country}
+              defaultValue={userData?.profile?.country}
             />
           </div>
           <div className="m-4 flex">
@@ -166,7 +166,7 @@ export default function ClientSettingsPage({ userData }: { userData: any }) {
               type="text"
               name="organization"
               placeholder="Organization"
-              defaultValue={userData.profile.organization}
+              defaultValue={userData?.profile?.organization}
             />
           </div>
           <p>
@@ -183,7 +183,7 @@ export default function ClientSettingsPage({ userData }: { userData: any }) {
               type="text"
               name="recipient_name"
               placeholder="Recipient name"
-              defaultValue={userData.profile.recipient_name}
+              defaultValue={userData?.profile?.recipient_name}
             />
           </div>
           <div className="m-4 flex">
@@ -196,7 +196,7 @@ export default function ClientSettingsPage({ userData }: { userData: any }) {
               type="text"
               name="recipient_zip_code"
               placeholder="Recipient zip code"
-              defaultValue={userData.profile.recipient_zip_code}
+              defaultValue={userData?.profile?.recipient_zip_code}
             />
           </div>
           <div className="m-4 flex">
@@ -209,7 +209,7 @@ export default function ClientSettingsPage({ userData }: { userData: any }) {
               type="text"
               name="recipient_country"
               placeholder="Recipient country"
-              defaultValue={userData.profile.recipient_country}
+              defaultValue={userData?.profile?.recipient_country}
             />
           </div>
           <div className="m-4 flex">
@@ -222,7 +222,7 @@ export default function ClientSettingsPage({ userData }: { userData: any }) {
               type="text"
               name="recipient_state"
               placeholder="Recipient state"
-              defaultValue={userData.profile.recipient_state}
+              defaultValue={userData?.profile?.recipient_state}
             />
           </div>
           <div className="m-4 flex">
@@ -235,7 +235,7 @@ export default function ClientSettingsPage({ userData }: { userData: any }) {
               type="text"
               name="recipient_city"
               placeholder="Recipient city"
-              defaultValue={userData.profile.recipient_city}
+              defaultValue={userData?.profile?.recipient_city}
             />
           </div>
           <div className="m-4 flex">
@@ -248,7 +248,7 @@ export default function ClientSettingsPage({ userData }: { userData: any }) {
               type="text"
               name="recipient_address"
               placeholder="Recipient address"
-              defaultValue={userData.profile.recipient_address}
+              defaultValue={userData?.profile?.recipient_address}
             />
           </div>
           <div className="m-4 flex">
@@ -261,7 +261,7 @@ export default function ClientSettingsPage({ userData }: { userData: any }) {
               type="tel"
               name="recipient_phone_number"
               placeholder="Recipient phone number"
-              defaultValue={userData.profile.recipient_phone_number}
+              defaultValue={userData?.profile?.recipient_phone_number}
             />
           </div>
         </form>
