@@ -6,12 +6,15 @@ import TextEditor from "@/components/editor/TextEditor";
 import { ProblemService } from "@/service/problem/problem.service";
 import CustomToastContainer from "@/components/CustomToast/CustomToastContainer";
 import { CustomToast } from "@/util/Toast/CustomToast";
+import CustomSelect from "@/components/CustomSelect/CustomSelect";
 
 export default function EditProblemClient({
   id,
   problemData,
+  tagData,
 }: {
   id: number;
+  tagData: any;
   problemData: any;
 }) {
   const [statement, setStatement] = useState(problemData.statement);
@@ -22,6 +25,8 @@ export default function EditProblemClient({
   const [message, setMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  const [tags, setTags] = useState<string[]>([]);
 
   const sample_test_cases = problemData.sample_test_cases;
   const system_test_cases = problemData.system_test_cases;
@@ -51,6 +56,13 @@ export default function EditProblemClient({
   };
   const handleNoteChange = (value: string) => {
     setNote(value);
+  };
+
+  const handleTagChange = (e: any) => {
+    const values = e.map((option: any) => {
+      return option.value;
+    });
+    setTags(values);
   };
 
   const difficultes = [
@@ -87,6 +99,7 @@ export default function EditProblemClient({
 
     const data = {
       name: name,
+      tags: tags,
       statement: statement,
       time_limit: time_limit,
       memory_limit: memory_limit,
@@ -302,6 +315,29 @@ export default function EditProblemClient({
                 placeholder="System test cases output"
                 defaultValue={system_test_cases_output}
               ></textarea>
+            </div>
+            <div className="m-4 flex">
+              <label className="w-full" htmlFor="tags">
+                Tags
+              </label>
+
+              <div className="w-full">
+                <CustomSelect
+                  defaultValue={tagData.map((tag: any) => {
+                    return {
+                      value: tag.name,
+                      label: tag.name,
+                    };
+                  })}
+                  onChange={handleTagChange}
+                  options={tagData.map((tag: any) => {
+                    return {
+                      value: tag.name,
+                      label: tag.name,
+                    };
+                  })}
+                />
+              </div>
             </div>
           </form>
         </div>
