@@ -49,9 +49,21 @@ export default async function Home() {
             {problemData?.map((problem: any) => (
               <tr key={problem.id}>
                 <td>
-                  <Link className="link" href={`/problems/${problem.id}`}>
-                    {problem.name}
-                  </Link>
+                  <div className="flex justify-between">
+                    <div>
+                      <Link className="link" href={`/problems/${problem.id}`}>
+                        {problem.name}
+                      </Link>
+                    </div>
+                    <div>
+                      {problem.ProblemTag.map((tag: any, index: number) => (
+                        <span key={tag.id} className="text-gray-500">
+                          {tag.tag.name}
+                          {index === problem.ProblemTag.length - 1 ? "" : ", "}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 </td>
                 <td>{problem.difficulty}</td>
                 <td>
