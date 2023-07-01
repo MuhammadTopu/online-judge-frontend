@@ -45,6 +45,7 @@ export const ProblemService = {
   create: async (
     {
       name,
+      tags,
       statement,
       time_limit,
       memory_limit,
@@ -59,6 +60,7 @@ export const ProblemService = {
       system_test_cases_output,
     }: {
       name?: string;
+      tags?: string[];
       statement?: string;
       time_limit?: number;
       memory_limit?: number;
@@ -85,6 +87,7 @@ export const ProblemService = {
 
     const data = {
       name: name,
+      tags: tags,
       statement: statement,
       time_limit: time_limit,
       memory_limit: memory_limit,

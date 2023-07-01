@@ -6,8 +6,9 @@ import TextEditor from "@/components/editor/TextEditor";
 import { ProblemService } from "@/service/problem/problem.service";
 import CustomToastContainer from "@/components/CustomToast/CustomToastContainer";
 import { CustomToast } from "@/util/Toast/CustomToast";
+import CustomSelect from "@/components/CustomSelect/CustomSelect";
 
-export default function CreateProblemClient() {
+export default function CreateProblemClient({ tagData }: { tagData: any }) {
   const [statement, setStatement] = useState("");
   const [input_format, setInputFormat] = useState("");
   const [output_format, setOutputFormat] = useState("");
@@ -16,6 +17,8 @@ export default function CreateProblemClient() {
   const [message, setMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  const [tags, setTags] = useState<string[]>([]);
 
   const handleStatementChange = (value: string) => {
     setStatement(value);
@@ -28,6 +31,13 @@ export default function CreateProblemClient() {
   };
   const handleNoteChange = (value: string) => {
     setNote(value);
+  };
+
+  const handleTagChange = (e: any) => {
+    const values = e.map((option: any) => {
+      return option.value;
+    });
+    setTags(values);
   };
 
   const difficultes = [
@@ -65,6 +75,7 @@ export default function CreateProblemClient() {
     const data = {
       name: name,
       statement: statement,
+      tags: tags,
       time_limit: time_limit,
       memory_limit: memory_limit,
       input_format: input_format,
@@ -272,6 +283,23 @@ export default function CreateProblemClient() {
                 id="system_test_cases_output"
                 placeholder="System test cases output"
               ></textarea>
+            </div>
+            <div className="m-4 flex">
+              <label className="w-full" htmlFor="tags">
+                Tags
+              </label>
+
+              <div className="w-full">
+                <CustomSelect
+                  onChange={handleTagChange}
+                  options={tagData.map((tag: any) => {
+                    return {
+                      value: tag.name,
+                      label: tag.name,
+                    };
+                  })}
+                />
+              </div>
             </div>
           </form>
         </div>

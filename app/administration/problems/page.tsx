@@ -30,6 +30,12 @@ export default async function Home() {
         <h1 className="font-bold m-2">Problems</h1>
       </div>
 
+      <div>
+        <Link href="/administration/problems/create" className="link">
+          Create new problem
+        </Link>
+      </div>
+
       <div className="w-1/2">
         <table className="table">
           <thead>

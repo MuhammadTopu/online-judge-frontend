@@ -7,7 +7,7 @@ const config = {
   },
 };
 
-export const PermissionService = {
+export const TagService = {
   findAll: async (context: any = null) => {
     const userToken = CookieHelper.get({ key: "token", context });
 
@@ -18,6 +18,6 @@ export const PermissionService = {
       },
     };
 
-    return await Fetch.get(`/permission`, _config);
+    return await Fetch.get(`/tag`, _config);
   },
 };
