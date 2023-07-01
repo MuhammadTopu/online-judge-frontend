@@ -3,7 +3,7 @@ import { Alert } from "@/components/alert/Alert";
 import { DateHelper } from "@/helper/date.helper";
 import { UserService } from "@/service/user/user.service";
 import Link from "next/link";
-import React, { ChangeEvent, useState } from "react";
+import React, { useState } from "react";
 import CustomToastContainer from "@/components/CustomToast/CustomToastContainer";
 import { CustomToast } from "@/util/Toast/CustomToast";
 import CustomImage from "@/components/reusable/CustomImage";
@@ -13,8 +13,14 @@ export default function ClientProfilePage({ userData }: { userData: any }) {
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const [showEditAvatar, setshowEditAvatar] = useState(false);
+
   const [file, setFile] = useState<any>();
   const [image, setImage] = useState(userData.avatar);
+
+  const handleEditShowAvatar = (e: any) => {
+    setshowEditAvatar(!showEditAvatar);
+  };
 
   const handleFileChange = (e: any) => {
     if (e.target.files) {
@@ -140,24 +146,33 @@ export default function ClientProfilePage({ userData }: { userData: any }) {
             />
           </div>
           <div>
-            <span className="font-bold">Upload profile picture</span>
-            <br />
-            <input
-              type="file"
-              accept="image/*"
-              name="avatar"
-              onChange={handleFileChange}
-            />
-            <br />
-            <div>
-              <button
-                className="btn primary"
-                type="button"
-                onClick={handleSubmit}
-              >
-                Upload
-              </button>
-            </div>
+            {userData.logged_in && (
+              <>
+                <div onClick={handleEditShowAvatar}>Change avatar</div>
+                {showEditAvatar && (
+                  <>
+                    <div>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        name="avatar"
+                        onChange={handleFileChange}
+                      />
+                      <br />
+                      <div>
+                        <button
+                          className="btn primary"
+                          type="button"
+                          onClick={handleSubmit}
+                        >
+                          Upload
+                        </button>
+                      </div>
+                    </div>
+                  </>
+                )}
+              </>
+            )}
           </div>
         </div>
       </div>

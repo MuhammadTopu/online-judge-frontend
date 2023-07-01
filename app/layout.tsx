@@ -1,7 +1,6 @@
-import Link from "next/link";
 import "./globals.css";
-import { UserService } from "@/service/user/user.service";
 import { cookies } from "next/headers";
+import { UserService } from "@/service/user/user.service";
 import ClientLayout from "./components/ClientLayout";
 
 export const metadata = {
