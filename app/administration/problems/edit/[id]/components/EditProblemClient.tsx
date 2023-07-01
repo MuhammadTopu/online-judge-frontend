@@ -31,19 +31,37 @@ export default function EditProblemClient({
   const sample_test_cases = problemData.sample_test_cases;
   const system_test_cases = problemData.system_test_cases;
 
-  const sample_test_cases_input = sample_test_cases.map((test_case: any) => {
-    return test_case.input + "\n";
-  });
-  const sample_test_cases_output = sample_test_cases.map((test_case: any) => {
-    return test_case.output + "\n";
-  });
+  const sample_test_cases_input = sample_test_cases.map(
+    (test_case: any, index: number) => {
+      return (
+        test_case.input + (index === sample_test_cases.length - 1 ? "" : "\n")
+      );
+    }
+  );
+  console.log(sample_test_cases_input);
 
-  const system_test_cases_input = system_test_cases.map((test_case: any) => {
-    return test_case.input + "\n";
-  });
-  const system_test_cases_output = system_test_cases.map((test_case: any) => {
-    return test_case.output + "\n";
-  });
+  const sample_test_cases_output = sample_test_cases.map(
+    (test_case: any, index: number) => {
+      return (
+        test_case.output + (index === sample_test_cases.length - 1 ? "" : "\n")
+      );
+    }
+  );
+
+  const system_test_cases_input = system_test_cases.map(
+    (test_case: any, index: number) => {
+      return (
+        test_case.input + (index === system_test_cases.length - 1 ? "" : "\n")
+      );
+    }
+  );
+  const system_test_cases_output = system_test_cases.map(
+    (test_case: any, index: number) => {
+      return (
+        test_case.output + (index === system_test_cases.length - 1 ? "" : "\n")
+      );
+    }
+  );
 
   const handleStatementChange = (value: string) => {
     setStatement(value);
@@ -277,7 +295,7 @@ export default function EditProblemClient({
                 name="sample_test_cases_input"
                 id="sample_test_cases_input"
                 placeholder="Sample test cases input"
-                defaultValue={sample_test_cases_input}
+                defaultValue={sample_test_cases_input.join("")}
               ></textarea>
             </div>
             <div className="m-4 flex">
@@ -289,7 +307,7 @@ export default function EditProblemClient({
                 name="sample_test_cases_output"
                 id="sample_test_cases_output"
                 placeholder="Sample test cases output"
-                defaultValue={sample_test_cases_output}
+                defaultValue={sample_test_cases_output.join("")}
               ></textarea>
             </div>
             <div className="m-4 flex">
@@ -301,7 +319,7 @@ export default function EditProblemClient({
                 name="system_test_cases_input"
                 id="system_test_cases_input"
                 placeholder="System test cases input"
-                defaultValue={system_test_cases_input}
+                defaultValue={system_test_cases_input.join("")}
               ></textarea>
             </div>
             <div className="m-4 flex">
@@ -313,7 +331,7 @@ export default function EditProblemClient({
                 name="system_test_cases_output"
                 id="system_test_cases_output"
                 placeholder="System test cases output"
-                defaultValue={system_test_cases_output}
+                defaultValue={system_test_cases_output.join("")}
               ></textarea>
             </div>
             <div className="m-4 flex">
