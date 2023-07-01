@@ -26,7 +26,11 @@ export default function EditProblemClient({
   const [errorMessage, setErrorMessage] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const [tags, setTags] = useState<string[]>([]);
+  const [tags, setTags] = useState<string[]>(
+    problemData.ProblemTag.map((tag: any) => {
+      return tag.tag.name;
+    })
+  );
 
   const sample_test_cases = problemData.sample_test_cases;
   const system_test_cases = problemData.system_test_cases;
@@ -38,7 +42,6 @@ export default function EditProblemClient({
       );
     }
   );
-  console.log(sample_test_cases_input);
 
   const sample_test_cases_output = sample_test_cases.map(
     (test_case: any, index: number) => {
