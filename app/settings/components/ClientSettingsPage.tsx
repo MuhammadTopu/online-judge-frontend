@@ -5,6 +5,7 @@ import { DateHelper } from "@/helper/date.helper";
 import { UserService } from "@/service/user/user.service";
 import CustomToastContainer from "@/components/CustomToast/CustomToastContainer";
 import { CustomToast } from "@/util/Toast/CustomToast";
+import ClientAvatarSettingPage from "./ClientAvatarSettingPage";
 
 export default function ClientSettingsPage({ userData }: { userData: any }) {
   const [message, setMessage] = useState("");
@@ -73,6 +74,9 @@ export default function ClientSettingsPage({ userData }: { userData: any }) {
   };
   return (
     <main className="flex justify-center container">
+      <div>
+        <ClientAvatarSettingPage userData={userData} />
+      </div>
       <div className="self-center">
         {loading && <div>Please wait...</div>}
         {message && <Alert type={"success"}>{message}</Alert>}
