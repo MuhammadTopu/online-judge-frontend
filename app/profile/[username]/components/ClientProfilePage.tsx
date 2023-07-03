@@ -56,17 +56,9 @@ export default function ClientProfilePage({ userData }: { userData: any }) {
           </div>
           <div style={{ width: "600px" }}>
             <LineChart
-              labels={[
-                "January",
-                "February",
-                "March",
-                "April",
-                "May",
-                "June",
-                "July",
-              ]}
-              data={[10, 12, 14, 16, 18, 20, 22]}
               label="Submissions"
+              labels={userData?.stats?.submission?.labels}
+              data={userData?.stats?.submission?.data}
             />
           </div>
         </div>
