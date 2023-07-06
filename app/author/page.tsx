@@ -23,19 +23,21 @@ async function getAuthorProfileData() {
 export default async function Home() {
   const profileData = await getAuthorProfileData();
   return (
-    <main className="container">
-      <h1>Author page</h1>
-      <div className="flex">
-        <div>
-          <Link className="link" href="/author/contests">
-            Manage contest ({profileData.contest_count})
-          </Link>
-        </div>
+    <main className="container flex justify-center">
+      <div>
+        <h1 className="text-xl">Author Dashboard</h1>
+        <div className="flex">
+          <div>
+            <Link className="link" href="/author/contests">
+              Manage contest ({profileData.contest_count})
+            </Link>
+          </div>
 
-        <div className="mx-2">
-          <Link className="link" href="/author/problems">
-            Manage problem ({profileData.problem_count})
-          </Link>
+          <div className="mx-2">
+            <Link className="link" href="/author/problems">
+              Manage problem ({profileData.problem_count})
+            </Link>
+          </div>
         </div>
       </div>
     </main>

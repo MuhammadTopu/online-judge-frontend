@@ -108,8 +108,8 @@ export default function CodeEditorSection({
                 <div>Actual output: {item.actualOutput}</div>
                 <div>Expected output: {item.expectedOutput}</div>
                 <div>Verdict: {item.verdict}</div>
-                <div>Time: {item.time}</div>
-                <div>Memory: {item.memory}</div>
+                {/* <div>Time: {item.time}</div>
+                <div>Memory: {item.memory}</div> */}
                 <hr />
               </div>
             ))}
