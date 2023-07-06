@@ -1,4 +1,4 @@
-import { ProblemService } from "@/service/problem/problem.service";
+import { AuthorProblemService } from "@/service/author/authorProblem.service";
 import { cookies } from "next/headers";
 import Link from "next/link";
 
@@ -6,12 +6,11 @@ async function getProblemData() {
   const cookieStore = cookies();
   const token = cookieStore.get("token");
   try {
-    const problemService = await ProblemService.findAll({
-      me: 1,
+    const authorProblemService = await AuthorProblemService.findAll({
       token: token!["value"],
     });
 
-    const responseProblem = problemService.data.data;
+    const responseProblem = authorProblemService.data.data;
 
     return responseProblem;
   } catch (error: any) {
