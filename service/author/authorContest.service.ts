@@ -88,7 +88,7 @@ export const AuthorContestService = {
       description,
       start_at,
       end_at,
-      contest_type,
+      contest_visibility,
       password,
       participant_type,
     }: {
@@ -97,7 +97,7 @@ export const AuthorContestService = {
       description: string;
       start_at: string;
       end_at: string;
-      contest_type: string;
+      contest_visibility: string;
       password: string;
       participant_type: string;
     },
@@ -118,7 +118,7 @@ export const AuthorContestService = {
       description,
       start_at,
       end_at,
-      contest_type,
+      contest_visibility,
       password,
       participant_type,
     };

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Alert } from "@/components/alert/Alert";
 import TextEditor from "@/components/editor/TextEditor";
-import { ProblemService } from "@/service/problem/problem.service";
+import { AuthorProblemService } from "@/service/author/authorProblem.service";
 import CustomToastContainer from "@/components/CustomToast/CustomToastContainer";
 import { CustomToast } from "@/util/Toast/CustomToast";
 import CustomSelect from "@/components/CustomSelect/CustomSelect";
@@ -138,8 +138,8 @@ export default function EditProblemClient({
     setErrorMessage(null);
     setLoading(true);
     try {
-      const problemService = await ProblemService.update(id, data);
-      const resProblemData = problemService.data;
+      const authorProblemService = await AuthorProblemService.update(id, data);
+      const resProblemData = authorProblemService.data;
       if (resProblemData.error) {
         CustomToast.show(resProblemData.message);
         setErrorMessage(resProblemData.message);
