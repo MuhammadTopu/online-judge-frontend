@@ -125,4 +125,51 @@ export const AuthorContestService = {
 
     return await Fetch.patch(`/author/contest/${id}`, data, _config);
   },
+
+  // TODO: add problem
+  addProblem: async (
+    id: number,
+    {
+      name,
+      slug,
+      description,
+      start_at,
+      end_at,
+      contest_visibility,
+      password,
+      participant_type,
+    }: {
+      name: string;
+      slug: string;
+      description: string;
+      start_at: string;
+      end_at: string;
+      contest_visibility: string;
+      password: string;
+      participant_type: string;
+    },
+    context = null
+  ) => {
+    const userToken = CookieHelper.get({ key: "token", context });
+
+    const _config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + userToken,
+      },
+    };
+
+    const data = {
+      name,
+      slug,
+      description,
+      start_at,
+      end_at,
+      contest_visibility,
+      password,
+      participant_type,
+    };
+
+    return await Fetch.patch(`/author/contest/${id}`, data, _config);
+  },
 };
