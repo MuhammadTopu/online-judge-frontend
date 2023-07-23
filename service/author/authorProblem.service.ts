@@ -170,4 +170,18 @@ export const AuthorProblemService = {
 
     return await Fetch.patch(`/author/problem/${id}`, data, _config);
   },
+
+  // search problem to contest
+  search: async (query: string, context = null) => {
+    const userToken = CookieHelper.get({ key: "token", context });
+
+    const _config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + userToken,
+      },
+    };
+
+    return await Fetch.get(`/author/problem/search?q=${query}`, _config);
+  },
 };

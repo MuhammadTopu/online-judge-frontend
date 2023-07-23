@@ -8,8 +8,8 @@ export const UtilHelper = {
    * @param {*} delay
    * @returns
    */
-  debounce: function (fn, delay = 300) {
-    let timer;
+  debounce: function (fn: any, delay: number = 300) {
+    let timer: any;
     return function () {
       let context = this,
         args = arguments;

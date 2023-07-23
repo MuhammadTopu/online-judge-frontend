@@ -6,6 +6,8 @@ import { AuthorContestService } from "@/service/author/authorContest.service";
 import CustomToastContainer from "@/components/CustomToast/CustomToastContainer";
 import { CustomToast } from "@/util/Toast/CustomToast";
 import { DateHelper } from "@/helper/date.helper";
+import { UtilHelper } from "@/helper/util.helper";
+import { AuthorProblemService } from "@/service/author/authorProblem.service";
 
 export default function EditContestProblemClient({
   id,
@@ -18,6 +20,48 @@ export default function EditContestProblemClient({
   const [errorMessage, setErrorMessage] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  const [searchLoading, setSearchLoading] = useState(false);
+  const [problemSearchResults, setproblemSearchResults] = useState([]);
+  const [showSearch, setShowSearch] = useState(false);
+  const [searchText, setSearchText] = useState("");
+  const [problemId, setProblemId] = useState(0);
+
+  const handleOnInput = async (e: any) => {
+    if (e.target.value) {
+      setSearchText(e.target.value);
+      setShowSearch(true);
+      try {
+        const authorProblemService = await AuthorProblemService.search(
+          e.target.value
+        );
+        const response = authorProblemService.data;
+        const responseData = response.data;
+        if (response.error) {
+          setSearchLoading(false);
+        } else {
+          setproblemSearchResults(responseData);
+          setSearchLoading(false);
+        }
+      } catch (error: any) {
+        // return custom error message from API if any
+        if (error.response && error.response.data.message) {
+          setErrorMessage(error.response.data.message);
+          setSearchLoading(false);
+        } else {
+          setErrorMessage(error.message);
+          setSearchLoading(false);
+        }
+      }
+    } else {
+      setShowSearch(false);
+    }
+  };
+  const showResult = (e: any) => {
+    e.preventDefault();
+    handleOnInput(e);
+    // return UtilHelper.debounce(handleOnInput, 300);
+  };
+
   const alphabet_lists = [];
   for (let i = 65; i <= 90; i++) {
     alphabet_lists.push({
@@ -26,34 +70,33 @@ export default function EditContestProblemClient({
     });
   }
 
+  const handleSelectProblem = (problem_id: number, problem_name: string) => {
+    setProblemId(problem_id);
+    setSearchText(problem_name);
+    setShowSearch(false);
+  };
+
   // handle
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    const name = e.target.name.value;
-    const slug = e.target.slug.value;
-    const description = e.target.description.value;
-    const start_at = e.target.start_at.value;
-    const end_at = e.target.end_at.value;
-    const contest_visibility = e.target.contest_visibility.value;
-    const password = e.target.password.value;
-    const participant_type = e.target.participant_type.value;
+    const problem_id: number = problemId;
+    const max_score: number = e.target.max_score.value;
+    const sort_order: string = e.target.sort_order.value;
 
     const data = {
-      name,
-      slug,
-      description,
-      start_at,
-      end_at,
-      contest_visibility,
-      password,
-      participant_type,
+      problem_id,
+      max_score,
+      sort_order,
     };
     setMessage("");
     setErrorMessage(null);
     setLoading(true);
     try {
-      const authorContestService = await AuthorContestService.update(id, data);
+      const authorContestService = await AuthorContestService.addProblem(
+        id,
+        data
+      );
       const response = authorContestService.data;
       if (response.error) {
         CustomToast.show(response.message);
@@ -96,12 +139,38 @@ export default function EditContestProblemClient({
 
               <input
                 id="q"
+                onInput={(e) => showResult(e)}
                 className="input"
                 type="text"
                 name="q"
+                value={searchText}
                 placeholder="e.g. Tree"
               />
             </div>
+            {showSearch && (
+              <div>
+                Showing results for <strong>{searchText}</strong>
+                {problemSearchResults &&
+                  problemSearchResults.map((problemSearchResult: any) => (
+                    <div
+                      key={problemSearchResult.id}
+                      className="border border-gray-200 rounded-md p-2 m-2"
+                    >
+                      <div
+                        onClick={() =>
+                          handleSelectProblem(
+                            problemSearchResult.id,
+                            problemSearchResult.name
+                          )
+                        }
+                        className="flex justify-between"
+                      >
+                        <div>{problemSearchResult.name}</div>
+                      </div>
+                    </div>
+                  ))}
+              </div>
+            )}
 
             <div className="m-4 flex">
               <label className="w-full" htmlFor="sort_order">

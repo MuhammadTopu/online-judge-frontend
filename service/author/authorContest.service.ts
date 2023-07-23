@@ -126,27 +126,31 @@ export const AuthorContestService = {
     return await Fetch.patch(`/author/contest/${id}`, data, _config);
   },
 
-  // TODO: add problem
+  // read problem from contest
+  readProblem: async (contest_id: number, context = null) => {
+    const userToken = CookieHelper.get({ key: "token", context });
+
+    const _config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + userToken,
+      },
+    };
+
+    return await Fetch.get(`/author/contest/${contest_id}/problem`, _config);
+  },
+
+  // add problem to contest
   addProblem: async (
-    id: number,
+    contest_id: number,
     {
-      name,
-      slug,
-      description,
-      start_at,
-      end_at,
-      contest_visibility,
-      password,
-      participant_type,
+      problem_id,
+      max_score,
+      sort_order,
     }: {
-      name: string;
-      slug: string;
-      description: string;
-      start_at: string;
-      end_at: string;
-      contest_visibility: string;
-      password: string;
-      participant_type: string;
+      problem_id: number;
+      max_score: number;
+      sort_order: string;
     },
     context = null
   ) => {
@@ -160,16 +164,31 @@ export const AuthorContestService = {
     };
 
     const data = {
-      name,
-      slug,
-      description,
-      start_at,
-      end_at,
-      contest_visibility,
-      password,
-      participant_type,
+      problem_id,
+      max_score,
+      sort_order,
     };
 
-    return await Fetch.patch(`/author/contest/${id}`, data, _config);
+    return await Fetch.post(
+      `/author/contest/${contest_id}/problem`,
+      data,
+      _config
+    );
+  },
+  // remove problem to contest
+  removeProblem: async (id: number, contest_id: number, context = null) => {
+    const userToken = CookieHelper.get({ key: "token", context });
+
+    const _config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + userToken,
+      },
+    };
+
+    return await Fetch.delete(
+      `/author/contest/${contest_id}/problem/${id}`,
+      _config
+    );
   },
 };
