@@ -127,8 +127,17 @@ export const AuthorContestService = {
   },
 
   // read problem from contest
-  readProblem: async (contest_id: number, context = null) => {
-    const userToken = CookieHelper.get({ key: "token", context });
+  readProblem: async ({
+    contest_id,
+    token = "",
+    context = null,
+  }: {
+    contest_id: number;
+    token?: string;
+    context?: any;
+  }) => {
+    // const userToken = CookieHelper.get({ key: "token", context });
+    const userToken = token;
 
     const _config = {
       headers: {

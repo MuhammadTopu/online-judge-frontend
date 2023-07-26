@@ -12,9 +12,11 @@ import { AuthorProblemService } from "@/service/author/authorProblem.service";
 export default function EditContestProblemClient({
   id,
   contestData,
+  contestProblemData,
 }: {
   id: number;
   contestData: any;
+  contestProblemData: any;
 }) {
   const [message, setMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState(null);
@@ -76,6 +78,39 @@ export default function EditContestProblemClient({
     setShowSearch(false);
   };
 
+  // handle problem remove
+  const handleRemove = async (e: any) => {
+    e.preventDefault();
+
+    setMessage("");
+    setErrorMessage(null);
+    setLoading(true);
+    try {
+      const authorContestService = await AuthorContestService.removeProblem(
+        id,
+        contestData.id
+      );
+      const response = authorContestService.data;
+      if (response.error) {
+        CustomToast.show(response.message);
+        setErrorMessage(response.message);
+        setLoading(false);
+      } else {
+        CustomToast.show(response.message);
+        setMessage(response.message);
+        setLoading(false);
+      }
+    } catch (error: any) {
+      // return custom error message from API if any
+      if (error.response && error.response.data.message) {
+        setErrorMessage(error.response.data.message);
+        setLoading(false);
+      } else {
+        setErrorMessage(error.message);
+        setLoading(false);
+      }
+    }
+  };
   // handle
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -208,6 +243,24 @@ export default function EditContestProblemClient({
               />
             </div>
           </form>
+
+          <div>
+            <label htmlFor="">Selected problems</label>
+            {contestProblemData.map((data: any) => {
+              return (
+                <div key={data.id}>
+                  <div className="flex justify-between">
+                    <div>
+                      {data.sort_order}. {data.problem.name}
+                    </div>
+                    <div className="link cursor-pointer" onClick={handleRemove}>
+                      Remove
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </main>
     </div>
