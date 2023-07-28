@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 import CodeEditorSection from "./components/CodeEditorSection";
 import { AppConfig } from "@/config/app.config";
 import { Metadata } from "next";
+import { UserService } from "@/service/user/user.service";
 
 async function getProblemData(id: number) {
   const cookieStore = cookies();
@@ -24,6 +25,25 @@ async function getProblemData(id: number) {
   }
 }
 
+async function getUserData() {
+  const cookieStore = cookies();
+  const token = cookieStore.get("token");
+  try {
+    const userService = await UserService.getUserDetails({
+      token: token && token!["value"],
+    });
+
+    const responseUser = userService.data.data;
+
+    return responseUser;
+  } catch (error: any) {
+    if (error.response && error.response.data.message) {
+      // console.log(error.response.data.message);
+    }
+    return null;
+  }
+}
+
 // Dynamic metadata
 export async function generateMetadata({
   params,
@@ -37,6 +57,7 @@ export async function generateMetadata({
   };
 }
 export default async function Index({ params }: { params: { id: number } }) {
+  const userData = await getUserData();
   const problemData = await getProblemData(params.id);
 
   return (
@@ -127,7 +148,10 @@ export default async function Index({ params }: { params: { id: number } }) {
           )}
         </div>
         <div>
-          <CodeEditorSection problem_id={problemData.id} />
+          <CodeEditorSection
+            user_id={userData.id}
+            problem_id={problemData.id}
+          />
         </div>
       </main>
     </div>

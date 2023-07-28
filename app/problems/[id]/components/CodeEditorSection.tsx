@@ -2,13 +2,18 @@
 import { Alert } from "@/components/alert/Alert";
 import CodeEditor from "@/components/editor/CodeEditor";
 import { JudgeService } from "@/service/judge/judge.service";
-import React, { useState } from "react";
+import { socket } from "@/util/Socket";
+import React, { useEffect, useState } from "react";
 
 export default function CodeEditorSection({
+  user_id,
   problem_id,
 }: {
+  user_id: number;
   problem_id: number;
 }) {
+  const [isSocketConnected, setIsSocketConnected] = useState(socket.connected);
+
   const [code, setCode] = useState("");
   const [language, setLanguage] = useState("cpp");
   const [result, setResult] = useState<any>();
@@ -33,6 +38,11 @@ export default function CodeEditorSection({
     try {
       const judgeService = await JudgeService.create(data);
       const resJudgeService = judgeService.data;
+      socket.emit("sendMessage", {
+        to: user_id,
+        data: resJudgeService.data.data,
+      });
+
       if (resJudgeService.error) {
         setErrorMessage(resJudgeService.message);
         setLoading(false);
@@ -55,6 +65,25 @@ export default function CodeEditorSection({
     }
   };
 
+  useEffect(() => {
+    // handle websocket events
+    socket.on("connect", () => {
+      setIsSocketConnected(true);
+      console.log("connected");
+    });
+    socket.on("disconnect", () => {
+      setIsSocketConnected(false);
+    });
+    socket.on("message", ({ from, data }) => {
+      console.log(data);
+    });
+    return () => {
+      socket.off("connect");
+      socket.off("disconnect");
+      socket.off("message");
+    };
+  }, []);
+
   const handleEditorChange = (value: any, event: any) => {
     setCode(value);
   };
@@ -65,7 +94,7 @@ export default function CodeEditorSection({
         <select
           style={{ border: "solid 1px" }}
           value={language}
-          defaultValue={language}
+          // defaultValue={language}
           onChange={(e) => setLanguage(e.target.value)}
         >
           <option value="">Select Language</option>
