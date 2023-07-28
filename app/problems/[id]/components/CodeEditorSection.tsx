@@ -38,19 +38,20 @@ export default function CodeEditorSection({
     try {
       const judgeService = await JudgeService.create(data);
       const resJudgeService = judgeService.data;
-      socket.emit("sendMessage", {
-        to: user_id,
-        data: resJudgeService.data.data,
-      });
+      // socket.emit("sendMessage", {
+      //   to: user_id,
+      //   // data: resJudgeService.data.data,
+      //   data: { name: "sojeb", age: 23 },
+      // });
 
       if (resJudgeService.error) {
         setErrorMessage(resJudgeService.message);
         setLoading(false);
       } else {
-        console.log(resJudgeService.data);
-        setResult(resJudgeService.data);
+        // console.log(resJudgeService.data);
+        // setResult(resJudgeService.data);
 
-        setMessage(resJudgeService.data.verdict);
+        // setMessage(resJudgeService.data.verdict);
         setLoading(false);
       }
     } catch (error: any) {
@@ -75,13 +76,20 @@ export default function CodeEditorSection({
       setIsSocketConnected(false);
     });
     socket.on("message", ({ from, data }) => {
-      console.log(data);
+      setResult(data.data);
+      setMessage(data.data.verdict);
     });
     return () => {
       socket.off("connect");
       socket.off("disconnect");
       socket.off("message");
     };
+  }, [user_id]);
+
+  useEffect(() => {
+    socket.emit("joinRoom", user_id);
+
+    return () => {};
   }, []);
 
   const handleEditorChange = (value: any, event: any) => {
