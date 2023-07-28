@@ -45,14 +45,13 @@ export default function CodeEditorSection({
       // });
 
       if (resJudgeService.error) {
-        setErrorMessage(resJudgeService.message);
-        setLoading(false);
+        // setErrorMessage(resJudgeService.message);
+        // setLoading(false);
       } else {
         // console.log(resJudgeService.data);
         // setResult(resJudgeService.data);
-
         // setMessage(resJudgeService.data.verdict);
-        setLoading(false);
+        // setLoading(false);
       }
     } catch (error: any) {
       // return custom error message from API if any
@@ -76,6 +75,7 @@ export default function CodeEditorSection({
       setIsSocketConnected(false);
     });
     socket.on("message", ({ from, data }) => {
+      setLoading(false);
       setResult(data.data);
       setMessage(data.data.verdict);
     });
