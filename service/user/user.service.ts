@@ -17,28 +17,29 @@ export const UserService = {
   },
 
   register: async ({
-    fname,
-    lname,
+    username,
     email,
     password,
   }: {
-    fname: string;
-    lname: string;
+    username: string;
     email: string;
     password: string;
   }) => {
     const data = {
-      fname: fname,
-      lname: lname,
+      username: username,
       email: email,
       password: password,
     };
     return await Fetch.post("/auth/register", data, config);
   },
 
+  logout: (context = null) => {
+    CookieHelper.destroy({ key: "token", context });
+  },
   // get user details
-  getUserDetails: async (context = null) => {
-    const userToken = CookieHelper.get({ key: "token", context });
+  getUserDetails: async ({ token = "", context = null }) => {
+    // const userToken = CookieHelper.get({ key: "token", context });
+    const userToken = token;
 
     const _config = {
       headers: {
@@ -76,20 +77,57 @@ export const UserService = {
     return await Fetch.get(`/user/${id}`, _config);
   },
 
+  findOneByUsername: async ({
+    username,
+    token = "",
+    context = null,
+  }: {
+    username: string;
+    token?: string;
+    context?: any;
+  }) => {
+    // const userToken = CookieHelper.get({ key: "token", context });
+    const userToken = token || CookieHelper.get({ key: "token", context });
+
+    const _config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + userToken,
+      },
+    };
+
+    return await Fetch.get(`/user/profile/${username}`, _config);
+  },
+
   update: async (
-    id: number,
     {
       fname,
       lname,
-      username,
-      email,
-      role_id,
+      date_of_birth,
+      city,
+      country,
+      organization,
+      recipient_name,
+      recipient_zip_code,
+      recipient_country,
+      recipient_state,
+      recipient_city,
+      recipient_address,
+      recipient_phone_number,
     }: {
       fname: string;
       lname: string;
-      username: string;
-      email: string;
-      role_id: number;
+      date_of_birth: string;
+      city: string;
+      country: string;
+      organization: string;
+      recipient_name: string;
+      recipient_zip_code: string;
+      recipient_country: string;
+      recipient_state: string;
+      recipient_city: string;
+      recipient_address: string;
+      recipient_phone_number: string;
     },
     context = null
   ) => {
@@ -103,14 +141,36 @@ export const UserService = {
     };
 
     const data = {
-      fname,
-      lname,
-      username,
-      email,
-      role_id,
+      fname: fname,
+      lname: lname,
+      date_of_birth: date_of_birth,
+      city: city,
+      country: country,
+      organization: organization,
+      recipient_name: recipient_name,
+      recipient_zip_code: recipient_zip_code,
+      recipient_country: recipient_country,
+      recipient_state: recipient_state,
+      recipient_city: recipient_city,
+      recipient_address: recipient_address,
+      recipient_phone_number: recipient_phone_number,
     };
 
-    return await Fetch.patch(`/user/${id}`, data, _config);
+    return await Fetch.patch(`/user`, data, _config);
+  },
+
+  updateAvatar: async (data: any, context = null) => {
+    const userToken = CookieHelper.get({ key: "token", context });
+
+    const _config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + userToken,
+        "content-type": "multipart/form-data",
+      },
+    };
+
+    return await Fetch.patch(`/user/avatar`, data, _config);
   },
 
   //

@@ -1,51 +1,38 @@
-import Link from "next/link";
 import "./globals.css";
+import { cookies } from "next/headers";
+import { UserService } from "@/service/user/user.service";
+import ClientLayout from "./components/ClientLayout";
 
 export const metadata = {
   title: "Sojeb oj",
   description: "Participate in contests and win exciting prizes",
 };
 
-export default function RootLayout({
+async function getUserDetailsData() {
+  const cookieStore = cookies();
+  const token = cookieStore.get("token");
+  try {
+    const userService = await UserService.getUserDetails({
+      token: token!["value"],
+    });
+
+    const userData = userService.data.data;
+
+    return userData;
+  } catch (error: any) {
+    if (error.response && error.response.data.message) {
+      // console.log(error.response.data.message);
+    }
+    return null;
+  }
+}
+
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <html lang="en">
-      <body>
-        <header className="flex m-4">
-          <div>
-            <Link href="/">
-              <h1 className="text-center text-4xl font-bold text-red-600">
-                SojebOJ
-              </h1>
-            </Link>
-          </div>
-        </header>
+  const userData = await getUserDetailsData();
 
-        <nav className="navbar">
-          <Link className="nav-item" href="/">
-            Home
-          </Link>
-          <Link className="nav-item" href="/contests">
-            Contest
-          </Link>
-          <Link className="nav-item" href="/problems">
-            Problems
-          </Link>
-          <Link className="nav-item" href="/auth/login">
-            Login
-          </Link>
-          <Link className="nav-item" href="/auth/register">
-            Register
-          </Link>
-        </nav>
-
-        <div className="mt-6"></div>
-
-        {children}
-      </body>
-    </html>
-  );
+  return <ClientLayout userData={userData}>{children}</ClientLayout>;
 }

@@ -7,6 +7,12 @@ export const AppConfig = () => ({
     // server endpoint
     url: URL,
     name: "SojebOJ",
+    slogan: "Online Judge",
+    meta: {
+      description: "Online Judge",
+      keywords: "Online Judge",
+    },
+
     // api endpoint
     apiUrl: `${URL}/api`,
   },
