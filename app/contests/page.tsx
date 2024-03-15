@@ -34,8 +34,10 @@ export default async function Home() {
         <table className="table">
           <thead>
             <tr>
-              <th>Contest</th>
-              <th>Difficulty</th>
+              <th>Name</th>
+              <th>Writer</th>
+              <th>Start</th>
+              <th>Length</th>
             </tr>
           </thead>
           <tbody>

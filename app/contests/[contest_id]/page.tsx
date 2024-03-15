@@ -62,13 +62,13 @@ export default async function Index({
                   </tr>
                 </thead>
                 <tbody>
-                  {contestData.ContestProblem?.map((problemData: any) => (
+                  {contestData.contest_problems?.map((problemData: any) => (
                     <tr key={problemData.id}>
                       <td>
                         <div>
                           <Link
                             className="link"
-                            href={`/problems/${problemData.problem.id}`}
+                            href={`/contests/${params.contest_id}/problem/${problemData.problem.id}`}
                           >
                             {problemData.sort_order}. {problemData.problem.name}
                           </Link>
