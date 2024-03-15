@@ -134,7 +134,11 @@ export default function CodeEditorSection({
         <h2 className="text-xl">Result:</h2>
         <div>
           {loading && <div>Please wait...</div>}
-          {message && <Alert type={"success"}>{message}</Alert>}
+          {message && (
+            <Alert type={message == "AC" ? "success" : "danger"}>
+              {message}
+            </Alert>
+          )}
           {errorMessage && <Alert type={"danger"}>{errorMessage}</Alert>}
         </div>
         <div>

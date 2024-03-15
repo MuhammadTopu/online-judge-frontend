@@ -1,19 +1,19 @@
 import { cookies } from "next/headers";
 
-import { ProblemService } from "@/service/problem/problem.service";
-import EditProblemClient from "./components/EditProblemClient";
+import EditProblemClient from "./Components/EditProblemClient";
 import { TagService } from "@/service/tag/tag.service";
+import { AuthorProblemService } from "@/service/author/authorProblem.service";
 
 async function getProblemData(id: number) {
   const cookieStore = cookies();
   const token = cookieStore.get("token");
   try {
-    const problemService = await ProblemService.findOne({
+    const authorProblemService = await AuthorProblemService.findOne({
       id: id,
       token: token!["value"],
     });
 
-    const responseProblem = problemService.data.data;
+    const responseProblem = authorProblemService.data.data;
 
     return responseProblem;
   } catch (error: any) {
@@ -25,9 +25,9 @@ async function getProblemData(id: number) {
 }
 async function getTagData() {
   try {
-    const problemService = await TagService.findAll();
+    const authorProblemService = await TagService.findAll();
 
-    const responseProblem = problemService.data.data;
+    const responseProblem = authorProblemService.data.data;
 
     return responseProblem;
   } catch (error: any) {
@@ -39,6 +39,7 @@ async function getTagData() {
 }
 export default async function Index({ params }: { params: { id: number } }) {
   const problemData = await getProblemData(params.id);
+
   const tagData = await getTagData();
   return (
     <div>

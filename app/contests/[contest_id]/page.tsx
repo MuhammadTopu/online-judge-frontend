@@ -28,17 +28,20 @@ async function getContestData(id: number) {
 export async function generateMetadata({
   params,
 }: {
-  params: { id: number };
+  params: { contest_id: number };
 }): Promise<Metadata> {
-  const contestData = await getContestData(params.id);
+  const contestData = await getContestData(params.contest_id);
   return {
     title: `${contestData.name} - ${AppConfig().app.name}`,
     description: AppConfig().app.meta.description,
   };
 }
-export default async function Index({ params }: { params: { id: number } }) {
-  const contestData = await getContestData(params.id);
-  console.log(contestData);
+export default async function Index({
+  params,
+}: {
+  params: { contest_id: number };
+}) {
+  const contestData = await getContestData(params.contest_id);
 
   return (
     <div>

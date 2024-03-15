@@ -66,6 +66,51 @@
   .navbar .nav-item {
     @apply hover:text-red-600;
   }
+
+  /* badge */
+  .badge{
+    @apply inline-block rounded-full px-3 py-1 text-sm font-semibold text-gray-700
+  }
+
+  .badge-primary{
+    @apply bg-blue-200 text-blue-700;
+  }
+
+  .badge-warning{
+    @apply bg-yellow-200 text-yellow-700;
+  }
+
+  .badge-danger{
+    @apply bg-red-200 text-red-700;
+  }
+
+  .badge-success{
+    @apply bg-green-200 text-green-700;
+  }
+
+  .badge-info{
+    @apply bg-indigo-200 text-indigo-700;
+  }
+
+  .badge-light{
+    @apply bg-gray-200 text-gray-700;
+  }
+
+  .badge-dark{
+    @apply bg-gray-800 text-gray-200;
+  }
+
+  .badge-secondary{
+    @apply bg-gray-500 text-gray-200;
+  }
+
+  .badge-outline{
+    @apply bg-transparent border border-gray-300 text-gray-700;
+  }
+
+  .badge-outline-primary{
+    @apply bg-transparent border border-blue-300 text-blue-700;
+  }
 }
 
 .container {
