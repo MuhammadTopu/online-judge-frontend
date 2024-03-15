@@ -49,10 +49,12 @@ export default async function Home() {
                       </Link>
                     </div>
                     <div>
-                      {problem.ProblemTag.map((tag: any, index: number) => (
+                      {problem.problem_tags.map((tag: any, index: number) => (
                         <span key={tag.id} className="text-gray-500">
                           {tag.tag.name}
-                          {index === problem.ProblemTag.length - 1 ? "" : ", "}
+                          {index === problem.problem_tags.length - 1
+                            ? ""
+                            : ", "}
                         </span>
                       ))}
                     </div>

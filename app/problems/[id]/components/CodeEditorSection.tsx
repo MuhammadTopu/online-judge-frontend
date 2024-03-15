@@ -23,6 +23,10 @@ export default function CodeEditorSection({
   const [loading, setLoading] = useState(false);
 
   const submit = async (op: string = "run", e: any) => {
+    if (loading == true) {
+      return;
+    }
+
     e.preventDefault();
 
     const data = {
@@ -119,10 +123,15 @@ export default function CodeEditorSection({
       </div>
 
       <div className="m-2">
-        <button onClick={(e) => submit("run", e)} className="btn warning">
+        <button
+          disabled={loading}
+          onClick={(e) => submit("run", e)}
+          className="btn warning"
+        >
           Run
         </button>
         <button
+          disabled={loading}
           onClick={(e) => submit("submit", e)}
           className="btn danger mx-2"
         >
@@ -134,7 +143,11 @@ export default function CodeEditorSection({
         <h2 className="text-xl">Result:</h2>
         <div>
           {loading && <div>Please wait...</div>}
-          {message && <Alert type={"success"}>{message}</Alert>}
+          {message && (
+            <Alert type={message == "AC" ? "success" : "danger"}>
+              {message}
+            </Alert>
+          )}
           {errorMessage && <Alert type={"danger"}>{errorMessage}</Alert>}
         </div>
         <div>
