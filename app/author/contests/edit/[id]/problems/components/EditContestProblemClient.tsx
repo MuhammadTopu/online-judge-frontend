@@ -79,7 +79,7 @@ export default function EditContestProblemClient({
   };
 
   // handle problem remove
-  const handleRemove = async (e: any) => {
+  const handleRemove = async (e: any, id: number) => {
     e.preventDefault();
 
     setMessage("");
@@ -253,7 +253,10 @@ export default function EditContestProblemClient({
                     <div>
                       {data.sort_order}. {data.problem.name}
                     </div>
-                    <div className="link cursor-pointer" onClick={handleRemove}>
+                    <div
+                      className="link cursor-pointer"
+                      onClick={(e) => handleRemove(e, data.id)}
+                    >
                       Remove
                     </div>
                   </div>
